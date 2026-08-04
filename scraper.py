@@ -11,14 +11,14 @@ import sys
 import time
 import unicodedata
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from email.message import EmailMessage
 from pathlib import Path
 from typing import Iterable
-from urllib.parse import urljoin, urlparse, urldefrag
+from urllib.parse import urldefrag, urljoin, urlparse
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from dateutil import parser as date_parser
 
 ROOT = Path(__file__).resolve().parent
@@ -26,34 +26,44 @@ SOURCES_FILE = ROOT / "config" / "sources.csv"
 DATA_FILE = ROOT / "data" / "notices.json"
 PUBLIC_FILE = ROOT / "docs" / "data.json"
 
-REQUEST_TIMEOUT = 25
-MAX_LISTING_PAGES_PER_SOURCE = 8
-MAX_LINKS_PER_PAGE = 300
-SLEEP_BETWEEN_REQUESTS = 0.6
+REQUEST_TIMEOUT = 18
+MAX_LISTING_PAGES_PER_SOURCE = 5
+MAX_LINKS_PER_PAGE = 250
+SLEEP_BETWEEN_REQUESTS = 0.25
+MAX_AGE_DAYS = 730
 
 PROCUREMENT_TERMS = [
     "przetarg", "zamowien", "postepowan", "zaproszenie do skladania ofert",
-    "zapytanie ofertowe", "ogloszen", "swz", "specyfikacja warunkow",
-    "roboty budowlane", "wykonawca", "ofert"
+    "zapytanie ofertowe", "ogloszen", "roboty budowlane", "wykonawca",
+    "skladania ofert", "specyfikacja warunkow", "swz"
 ]
 
 OBJECT_TERMS = {
-    "obora": 40, "obor": 40, "chlewn": 40, "kurnik": 40, "indycz": 45,
-    "stajni": 35, "stajnia": 35, "owczarni": 35, "cielec": 30,
-    "cielętnik": 40, "tuczarn": 40, "porodow": 35, "ferma": 30,
-    "budynek inwentarski": 40, "hala inwentarska": 40, "hala rolnicza": 35,
-    "magazyn zboz": 40, "magazyn pasz": 35, "magazyn": 18,
-    "silos": 30, "wiata": 22, "dojarni": 40, "dojarnia": 40,
-    "hala udojowa": 40, "kuchnia pasz": 40, "mieszalnia pasz": 40,
-    "gnojowic": 35, "plyta obornik": 35, "płyta obornik": 35,
-    "zbiornik": 12, "budynek gospodarczy": 20
+    "obora": 45, "obor": 45, "chlewn": 45, "kurnik": 45, "indycz": 50,
+    "stajni": 42, "stajnia": 42, "owczarni": 40, "cielec": 32,
+    "cielętnik": 45, "tuczarn": 45, "porodow": 38, "ferma": 35,
+    "budynek inwentarski": 48, "hala inwentarska": 48, "hala rolnicza": 38,
+    "magazyn zboz": 45, "magazyn pasz": 42, "magazyn": 18,
+    "silos": 32, "wiata": 24, "dojarni": 45, "dojarnia": 45,
+    "hala udojowa": 45, "kuchnia pasz": 45, "mieszalnia pasz": 45,
+    "gnojowic": 40, "plyta obornik": 40, "płyta obornik": 40,
+    "zbiornik": 14, "budynek gospodarczy": 25
+}
+
+STRONG_OBJECT_TERMS = {
+    "obora", "obor", "chlewn", "kurnik", "indycz", "stajni", "stajnia",
+    "owczarni", "cielętnik", "tuczarn", "porodow", "ferma",
+    "budynek inwentarski", "hala inwentarska", "magazyn zboz",
+    "magazyn pasz", "dojarni", "dojarnia", "hala udojowa",
+    "kuchnia pasz", "mieszalnia pasz", "gnojowic", "plyta obornik"
 }
 
 WORK_TERMS = {
-    "budow": 20, "rozbudow": 20, "przebudow": 20, "moderniz": 18,
-    "remont": 15, "zaprojektuj i wybuduj": 25, "doprojektuj i wybuduj": 25,
-    "dokumentacj projekt": 12, "projekt budowlany": 12, "wykonanie robot": 18,
-    "generalny wykonawca": 20, "konstrukcj stalow": 15, "konstrukcj zelbet": 15,
+    "budow": 24, "rozbudow": 24, "przebudow": 24, "moderniz": 20,
+    "remont": 18, "zaprojektuj i wybuduj": 30, "doprojektuj i wybuduj": 30,
+    "dokumentacj projekt": 15, "projekt budowlany": 15, "wykonanie robot": 22,
+    "roboty budowlane": 22, "generalny wykonawca": 22,
+    "konstrukcj stalow": 18, "konstrukcj zelbet": 18,
     "dach": 10, "posadzk": 10, "wentylac": 10
 }
 
@@ -61,13 +71,34 @@ EXCLUDE_TERMS = [
     "nawoz", "material siewny", "nasion", "pasza", "mleko w proszku",
     "usluga kopania", "usluga zbioru", "sprzedaz zwierzat", "zakup zwierzat",
     "olej napedowy", "energia elektryczna", "ubezpieczen", "srodek ochrony roslin",
-    "bakterie azotowe", "weterynaryjn", "dzierzawa grunt"
+    "bakterie azotowe", "weterynaryjn", "dzierzawa grunt", "sprzedaz zboza",
+    "sprzedaż zboża", "sprzedaz nawozu", "zakup nawozu"
 ]
 
 LISTING_HINTS = [
     "przetarg", "zamowien", "postepowan", "ogloszen", "zapytan-ofert",
-    "zapytania-ofert", "bip", "platformazakupowa", "ezamowienia"
+    "zapytania-ofert", "bip", "platformazakupowa", "ezamowienia",
+    "smartpzp", "logintrade", "eb2b", "bazakonkurencyjnosci"
 ]
+
+DOCUMENT_EXTENSIONS = {
+    ".pdf", ".doc", ".docx", ".xls", ".xlsx", ".zip", ".rar", ".7z",
+    ".jpg", ".jpeg", ".png", ".odt", ".ods"
+}
+
+DOCUMENT_NOISE = [
+    "formularz", "zalacznik", "załącznik", "regulamin", "oswiadczenie",
+    "oświadczenie", "warunki udzialu", "warunków udziału", "swz", "wzor umowy",
+    "wzór umowy", "odpowiedzi", "wyjasnienia", "wyjaśnienia", "pytania",
+    "protokol", "protokół", "informacja z otwarcia", "ogloszenie o wyniku",
+    "ogłoszenie o wyniku", "modyfikacja", "zmiana terminu", "pobierz"
+]
+
+GENERIC_TITLES = {
+    "przetargi", "przetargi/ogloszenia", "przetargi i ogloszenia", "ogloszenia",
+    "ogloszenie przetargu", "zamowienia publiczne", "postepowania", "czytaj wiecej",
+    "wiecej", "szczegoly", "menu", "strona glowna"
+}
 
 DATE_PATTERNS = [
     re.compile(r"\b(20\d{2})[-/.](0?[1-9]|1[0-2])[-/.]([0-2]?\d|3[01])\b"),
@@ -79,12 +110,25 @@ DEADLINE_HINTS = [
     "termin zlozenia ofert", "termin nadsyłania ofert", "termin nadsyłania"
 ]
 
+
 @dataclass
 class Source:
     name: str
     url: str
     category: str
     region: str
+
+
+@dataclass
+class Candidate:
+    title: str
+    url: str
+    listing_url: str
+    context: str
+    score: int
+    matched: list[str]
+    published_date: str | None
+    deadline: str | None
 
 
 def normalize_text(value: str) -> str:
@@ -118,6 +162,10 @@ def same_domain(url_a: str, url_b: str) -> bool:
     return a == b or a.endswith("." + b) or b.endswith("." + a)
 
 
+def is_document_url(url: str) -> bool:
+    return Path(urlparse(url).path.lower()).suffix in DOCUMENT_EXTENSIONS
+
+
 def load_sources() -> list[Source]:
     rows: list[Source] = []
     with SOURCES_FILE.open(encoding="utf-8-sig", newline="") as handle:
@@ -138,11 +186,11 @@ def load_sources() -> list[Source]:
 
 def load_existing() -> dict:
     if not DATA_FILE.exists():
-        return {"generated_at": None, "sources_checked": 0, "errors": [], "items": []}
+        return {"items": []}
     try:
         return json.loads(DATA_FILE.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
-        return {"generated_at": None, "sources_checked": 0, "errors": [], "items": []}
+        return {"items": []}
 
 
 def fetch(session: requests.Session, url: str) -> tuple[str, str]:
@@ -155,45 +203,9 @@ def fetch(session: requests.Session, url: str) -> tuple[str, str]:
     return response.url, response.text
 
 
-def page_title(soup: BeautifulSoup, fallback: str) -> str:
-    if soup.find("h1"):
-        return clean_text(soup.find("h1").get_text(" ", strip=True), 300)
-    if soup.title:
-        return clean_text(soup.title.get_text(" ", strip=True), 300)
-    return fallback
-
-
 def is_listing_link(anchor_text: str, url: str) -> bool:
     hay = normalize_text(anchor_text + " " + url)
     return any(term in hay for term in LISTING_HINTS)
-
-
-def has_object_term(text: str) -> bool:
-    return any(term in text for term in OBJECT_TERMS)
-
-
-def score_candidate(text: str, source: Source) -> tuple[int, list[str]]:
-    norm = normalize_text(text)
-    matched: list[str] = []
-    score = 0
-
-    for term, points in OBJECT_TERMS.items():
-        if term in norm:
-            score += points
-            matched.append(term)
-    for term, points in WORK_TERMS.items():
-        if term in norm:
-            score += points
-            matched.append(term)
-    if any(term in norm for term in PROCUREMENT_TERMS):
-        score += 8
-    if source.category.lower() in {"ohz", "stadnina", "kowr", "uczelnia", "instytut"}:
-        score += 5
-
-    exclusions = [term for term in EXCLUDE_TERMS if term in norm]
-    if exclusions and not has_object_term(norm):
-        score -= 100
-    return score, sorted(set(matched))
 
 
 def parse_dates(text: str) -> list[str]:
@@ -217,75 +229,203 @@ def extract_deadline(text: str) -> str | None:
     for hint in DEADLINE_HINTS:
         idx = norm.find(hint)
         if idx >= 0:
-            segment = text[max(0, idx - 40): idx + 220]
-            dates = parse_dates(segment)
+            # Indeksy tekstu znormalizowanego i oryginalnego mogą się lekko różnić,
+            # dlatego sprawdzamy krótki fragment oraz cały blok jako plan awaryjny.
+            segment = text[max(0, idx - 60): idx + 260]
+            dates = parse_dates(segment) or parse_dates(text)
             if dates:
                 return dates[0]
     return None
 
 
-def item_id(url: str, title: str) -> str:
-    key = normalize_url(url, url) or url
-    if not key:
-        key = normalize_text(title)
-    return hashlib.sha256(key.encode("utf-8")).hexdigest()[:20]
+def score_candidate(text: str, listing_url: str) -> tuple[int, list[str]]:
+    norm = normalize_text(text)
+    object_matches = [term for term in OBJECT_TERMS if term in norm]
+    work_matches = [term for term in WORK_TERMS if term in norm]
+    procurement_match = any(term in norm for term in PROCUREMENT_TERMS) or is_listing_link("", listing_url)
+
+    # Musi to być jednocześnie inwestycja i właściwy typ obiektu.
+    if not object_matches or not work_matches or not procurement_match:
+        return 0, []
+
+    exclusions = [term for term in EXCLUDE_TERMS if term in norm]
+    strong_object = any(term in norm for term in STRONG_OBJECT_TERMS)
+    if exclusions and not strong_object:
+        return 0, []
+
+    score = sum(OBJECT_TERMS[t] for t in object_matches)
+    score += sum(WORK_TERMS[t] for t in work_matches)
+    score += 10
+    if exclusions:
+        score -= 30
+    return min(score, 100), sorted(set(object_matches + work_matches))
 
 
-def make_item(source: Source, title: str, url: str, source_page: str, context: str) -> dict | None:
-    title = clean_text(title, 500)
-    context = clean_text(context, 1600)
-    combined = f"{title} {context}"
-    score, matched = score_candidate(combined, source)
-    if score < 30 or not matched:
+def meaningful_label(value: str) -> bool:
+    norm = normalize_text(value)
+    if len(norm) < 12 or norm in GENERIC_TITLES:
+        return False
+    if any(noise in norm for noise in DOCUMENT_NOISE):
+        return False
+    return any(term in norm for term in OBJECT_TERMS) and any(term in norm for term in WORK_TERMS)
+
+
+def sentence_title(context: str) -> str | None:
+    sentences = re.split(r"(?<=[.!?;])\s+|\s{2,}|\n+", context)
+    choices: list[str] = []
+    for sentence in sentences:
+        sentence = clean_text(sentence, 320)
+        norm = normalize_text(sentence)
+        if 25 <= len(sentence) <= 320 and any(t in norm for t in OBJECT_TERMS) and any(t in norm for t in WORK_TERMS):
+            if not any(noise in norm for noise in DOCUMENT_NOISE):
+                choices.append(sentence)
+    if not choices:
+        return None
+    choices.sort(key=lambda x: (len(x) > 220, -len(x)))
+    return choices[0]
+
+
+def block_for_anchor(anchor: Tag) -> Tag | None:
+    block = anchor.find_parent(["article", "li", "tr"])
+    if block is not None:
+        return block
+
+    parent = anchor.parent
+    for _ in range(4):
+        if not isinstance(parent, Tag):
+            break
+        classes = " ".join(parent.get("class", []))
+        ident = f"{classes} {parent.get('id', '')}"
+        text_len = len(clean_text(parent.get_text(" ", strip=True), 4000))
+        if re.search(r"post|entry|item|tender|przetarg|offer|oglosz|zamow|aktual", ident, re.I) and 30 <= text_len <= 2600:
+            return parent
+        parent = parent.parent
+
+    fallback = anchor.find_parent(["p", "div"])
+    if fallback is not None:
+        text_len = len(clean_text(fallback.get_text(" ", strip=True), 4000))
+        if 30 <= text_len <= 1800:
+            return fallback
+    return None
+
+
+def choose_title_and_url(block: Tag, listing_url: str) -> tuple[str | None, str]:
+    labels: list[tuple[str, str]] = []
+
+    for heading in block.find_all(["h2", "h3", "h4", "h5"], limit=8):
+        label = clean_text(heading.get_text(" ", strip=True), 320)
+        link = heading.find("a", href=True)
+        href = normalize_url(listing_url, link.get("href")) if link else None
+        if meaningful_label(label):
+            labels.append((label, href or listing_url))
+
+    for anchor in block.find_all("a", href=True, limit=30):
+        label = clean_text(anchor.get_text(" ", strip=True), 320)
+        href = normalize_url(listing_url, anchor.get("href"))
+        if href and meaningful_label(label) and not is_document_url(href):
+            labels.append((label, href))
+
+    if labels:
+        labels.sort(key=lambda x: len(x[0]), reverse=True)
+        return labels[0]
+
+    context = clean_text(block.get_text(" ", strip=True), 2200)
+    title = sentence_title(context)
+    if not title:
+        return None, listing_url
+
+    # Dokumenty są tylko załącznikami. Gdy brak właściwego linku do wpisu,
+    # kierujemy użytkownika do strony z listą postępowań.
+    for anchor in block.find_all("a", href=True, limit=30):
+        href = normalize_url(listing_url, anchor.get("href"))
+        label = clean_text(anchor.get_text(" ", strip=True), 200)
+        if href and not is_document_url(href) and label and normalize_text(label) not in GENERIC_TITLES:
+            return title, href
+    return title, listing_url
+
+
+def candidate_from_block(block: Tag, listing_url: str) -> Candidate | None:
+    context = clean_text(block.get_text(" ", strip=True), 2400)
+    if len(context) < 30:
         return None
 
-    dates = parse_dates(combined)
-    deadline = extract_deadline(combined)
-    today = date.today().isoformat()
-    status = "Nieustalony"
-    if deadline:
-        status = "Otwarty" if deadline >= today else "Termin minął"
+    score, matched = score_candidate(context, listing_url)
+    if score < 60:
+        return None
 
-    return {
-        "id": item_id(url, title),
-        "source_name": source.name,
-        "source_category": source.category,
-        "region": source.region,
-        "title": title,
-        "url": url,
-        "source_page": source_page,
-        "published_date": dates[0] if dates else None,
-        "deadline": deadline,
-        "status": status,
-        "score": min(score, 100),
-        "matched_keywords": matched[:12],
-        "snippet": context[:700],
-    }
+    dates = parse_dates(context)
+    deadline = extract_deadline(context)
+    today = date.today()
+    future_deadline = bool(deadline and deadline >= today.isoformat())
+    parsed_dates = [date.fromisoformat(x) for x in dates]
+    if parsed_dates and max(parsed_dates) < today - timedelta(days=MAX_AGE_DAYS) and not future_deadline:
+        return None
+
+    title, url = choose_title_and_url(block, listing_url)
+    if not title:
+        return None
+
+    past_dates = [d for d in dates if d <= today.isoformat()]
+    published = max(past_dates) if past_dates else (dates[0] if dates else None)
+    return Candidate(
+        title=clean_text(title, 320),
+        url=url,
+        listing_url=listing_url,
+        context=context,
+        score=score,
+        matched=matched,
+        published_date=published,
+        deadline=deadline,
+    )
 
 
-def scan_source(session: requests.Session, source: Source) -> list[dict]:
-    final_url, text = fetch(session, source.url)
-    if not text:
-        return []
-    soup = BeautifulSoup(text, "lxml")
+def candidate_key(candidate: Candidate) -> str:
+    norm = normalize_text(candidate.title)
+    norm = re.sub(r"\b(20\d{2}|\d{1,2})\b", "", norm)
+    norm = re.sub(r"\b(przetarg|ogloszenie|zaproszenie|postepowanie|oferta|roboty budowlane)\b", "", norm)
+    norm = re.sub(r"\s+", " ", norm).strip()
+    words = norm.split()[:24]
+    return " ".join(words) or normalize_text(candidate.listing_url)
 
-    listing_urls = [final_url]
+
+def discover_listing_urls(soup: BeautifulSoup, final_url: str) -> list[str]:
+    urls: list[str] = []
+    if is_listing_link("", final_url):
+        urls.append(final_url)
+
     for anchor in soup.find_all("a", href=True)[:MAX_LINKS_PER_PAGE]:
         href = normalize_url(final_url, anchor.get("href"))
-        label = clean_text(anchor.get_text(" ", strip=True), 300)
-        if href and same_domain(final_url, href) and is_listing_link(label, href):
-            if href not in listing_urls:
-                listing_urls.append(href)
-        if len(listing_urls) >= MAX_LISTING_PAGES_PER_SOURCE:
+        label = clean_text(anchor.get_text(" ", strip=True), 250)
+        if not href or not is_listing_link(label, href):
+            continue
+        if same_domain(final_url, href) or any(host in href for host in (
+            "platformazakupowa.pl", "ezamowienia.gov.pl", "smartpzp.pl",
+            "logintrade.net", "eb2b.com.pl", "bazakonkurencyjnosci.funduszeeuropejskie.gov.pl"
+        )):
+            if href not in urls:
+                urls.append(href)
+        if len(urls) >= MAX_LISTING_PAGES_PER_SOURCE:
             break
 
-    items: list[dict] = []
-    seen_urls: set[str] = set()
+    # Jeśli adres z CSV był bezpośrednią zakładką, nie dodajemy strony głównej drugi raz.
+    if not urls:
+        urls.append(final_url)
+    return urls[:MAX_LISTING_PAGES_PER_SOURCE]
+
+
+def scan_source(session: requests.Session, source: Source) -> dict | None:
+    final_url, home_html = fetch(session, source.url)
+    if not home_html:
+        return None
+    home = BeautifulSoup(home_html, "lxml")
+    listing_urls = discover_listing_urls(home, final_url)
+
+    candidates: list[Candidate] = []
+    seen_blocks: set[str] = set()
 
     for listing_url in listing_urls:
         if listing_url == final_url:
-            page_html = text
-            real_url = final_url
+            real_url, page_html = final_url, home_html
         else:
             time.sleep(SLEEP_BETWEEN_REQUESTS)
             real_url, page_html = fetch(session, listing_url)
@@ -293,67 +433,109 @@ def scan_source(session: requests.Session, source: Source) -> list[dict]:
             continue
 
         page = BeautifulSoup(page_html, "lxml")
-        page_text = clean_text(page.get_text(" ", strip=True), 8000)
-        own = make_item(source, page_title(page, source.name), real_url, real_url, page_text)
-        if own and own["url"] not in seen_urls:
-            items.append(own)
-            seen_urls.add(own["url"])
+        for unwanted in page.find_all(["nav", "header", "footer", "script", "style", "noscript", "aside"]):
+            unwanted.decompose()
 
-        for anchor in page.find_all("a", href=True)[:MAX_LINKS_PER_PAGE]:
-            href = normalize_url(real_url, anchor.get("href"))
-            if not href or href in seen_urls:
+        main = page.find("main") or page.find(id=re.compile(r"content|main", re.I)) or page.body or page
+        for anchor in main.find_all("a", href=True)[:MAX_LINKS_PER_PAGE]:
+            block = block_for_anchor(anchor)
+            if block is None:
                 continue
-            label = clean_text(anchor.get_text(" ", strip=True), 500)
-            title_attr = clean_text(anchor.get("title", ""), 300)
-            nearby = ""
-            parent = anchor.find_parent(["article", "li", "tr", "div", "p"])
-            if parent:
-                nearby = clean_text(parent.get_text(" ", strip=True), 1800)
-            candidate_title = label or title_attr or Path(urlparse(href).path).name
-            item = make_item(source, candidate_title, href, real_url, nearby)
-            if item:
-                items.append(item)
-                seen_urls.add(href)
+            block_text = clean_text(block.get_text(" ", strip=True), 2600)
+            block_hash = hashlib.sha1(normalize_text(block_text).encode("utf-8")).hexdigest()
+            if block_hash in seen_blocks:
+                continue
+            seen_blocks.add(block_hash)
+            candidate = candidate_from_block(block, real_url)
+            if candidate:
+                candidates.append(candidate)
 
-    return items
+    if not candidates:
+        return None
+
+    deduped: dict[str, Candidate] = {}
+    for candidate in candidates:
+        key = candidate_key(candidate)
+        current = deduped.get(key)
+        if current is None or candidate.score > current.score:
+            deduped[key] = candidate
+
+    unique = list(deduped.values())
+    unique.sort(key=lambda c: (
+        bool(c.deadline and c.deadline >= date.today().isoformat()),
+        c.published_date or "",
+        c.score,
+    ), reverse=True)
+
+    top = unique[0]
+    deadlines = sorted({c.deadline for c in unique if c.deadline and c.deadline >= date.today().isoformat()})
+    deadline = deadlines[0] if deadlines else top.deadline
+    status = "Otwarty" if deadline and deadline >= date.today().isoformat() else "Do sprawdzenia"
+    published_dates = [c.published_date for c in unique if c.published_date]
+    published = max(published_dates) if published_dates else None
+
+    count = len(unique)
+    title = top.title if count == 1 else f"{top.title} (+{count - 1} inne pasujące postępowania)"
+    snippet = (
+        "Wykryto 1 pasujące postępowanie. Kliknij, aby przejść do źródła."
+        if count == 1 else
+        f"Wykryto {count} pasujące postępowania. Pokazano najnowsze lub najlepiej dopasowane."
+    )
+    fingerprint_payload = [
+        {"title": candidate.title, "url": candidate.url, "deadline": candidate.deadline}
+        for candidate in unique[:10]
+    ]
+    fingerprint = hashlib.sha256(
+        json.dumps(fingerprint_payload, ensure_ascii=False, sort_keys=True).encode("utf-8")
+    ).hexdigest()
+
+    source_id = hashlib.sha256(normalize_text(source.name + " " + source.url).encode("utf-8")).hexdigest()[:20]
+    return {
+        "id": source_id,
+        "source_name": source.name,
+        "source_category": source.category,
+        "region": source.region,
+        "title": title,
+        "url": top.url or top.listing_url,
+        "source_page": top.listing_url,
+        "published_date": published,
+        "deadline": deadline,
+        "status": status,
+        "score": top.score,
+        "matched_keywords": sorted({word for candidate in unique for word in candidate.matched})[:12],
+        "snippet": snippet,
+        "match_count": count,
+        "fingerprint": fingerprint,
+    }
 
 
 def merge_items(existing: dict, found: Iterable[dict]) -> tuple[list[dict], list[dict]]:
     now = datetime.now().astimezone().isoformat(timespec="seconds")
     old_map = {item.get("id"): item for item in existing.get("items", []) if item.get("id")}
-    merged: dict[str, dict] = dict(old_map)
+    current_items: list[dict] = []
     alerts: list[dict] = []
 
     for item in found:
         old = old_map.get(item["id"])
-        fingerprint = hashlib.sha256(json.dumps({
-            "title": item.get("title"), "deadline": item.get("deadline"),
-            "status": item.get("status"), "snippet": item.get("snippet")
-        }, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
-
         if old:
-            old_fingerprint = old.get("fingerprint")
             item["date_found"] = old.get("date_found", now)
-            item["change_type"] = "Zmienione" if old_fingerprint and old_fingerprint != fingerprint else "Bez zmian"
-            if item["change_type"] == "Zmienione":
-                alerts.append(item)
+            item["change_type"] = "Zmienione" if old.get("fingerprint") != item.get("fingerprint") else "Bez zmian"
         else:
             item["date_found"] = now
             item["change_type"] = "Nowe"
-            alerts.append(item)
 
         item["last_seen"] = now
-        item["fingerprint"] = fingerprint
-        merged[item["id"]] = item
+        if item["change_type"] in {"Nowe", "Zmienione"}:
+            alerts.append(item)
+        current_items.append(item)
 
-    values = list(merged.values())
-    values.sort(key=lambda x: (
+    current_items.sort(key=lambda x: (
         x.get("status") == "Otwarty",
-        x.get("change_type") == "Nowe",
-        x.get("date_found") or "",
+        x.get("change_type") in {"Nowe", "Zmienione"},
+        x.get("published_date") or "",
         x.get("score") or 0,
     ), reverse=True)
-    return values[:1000], alerts
+    return current_items, alerts
 
 
 def send_email(alerts: list[dict]) -> None:
@@ -363,16 +545,16 @@ def send_email(alerts: list[dict]) -> None:
     if not alerts or not user or not password or not recipient:
         return
 
-    lines = ["Nowe lub zmienione postępowania:\n"]
+    lines = ["Nowe lub zmienione źródła z pasującymi postępowaniami:\n"]
     for item in alerts[:25]:
         lines.append(
             f"- [{item.get('change_type')}] {item.get('source_name')}: {item.get('title')}\n"
-            f"  Termin: {item.get('deadline') or 'nieustalony'} | Dopasowanie: {item.get('score')}/100\n"
+            f"  Termin: {item.get('deadline') or 'do sprawdzenia'}\n"
             f"  {item.get('url')}\n"
         )
 
     message = EmailMessage()
-    message["Subject"] = f"Monitor przetargów Agro: {len(alerts)} nowych/zmienionych"
+    message["Subject"] = f"Monitor przetargów Agro: {len(alerts)} nowych/zmienionych źródeł"
     message["From"] = user
     message["To"] = recipient
     message.set_content("\n".join(lines))
@@ -387,26 +569,28 @@ def main() -> int:
     existing = load_existing()
     session = requests.Session()
     session.headers.update({
-        "User-Agent": "Mozilla/5.0 (compatible; AgroTenderMonitor/1.0; +https://github.com/)",
+        "User-Agent": "Mozilla/5.0 (compatible; AgroTenderMonitor/2.0; +https://github.com/)",
         "Accept-Language": "pl-PL,pl;q=0.9,en;q=0.7",
     })
 
-    all_found: list[dict] = []
+    found_sources: list[dict] = []
     errors: list[dict] = []
     for source in sources:
         try:
             print(f"Sprawdzam: {source.name} -> {source.url}")
-            all_found.extend(scan_source(session, source))
-        except Exception as exc:  # noqa: BLE001 - one broken site must not stop the whole monitor
+            item = scan_source(session, source)
+            if item:
+                found_sources.append(item)
+        except Exception as exc:  # jeden niedziałający serwis nie zatrzymuje monitora
             print(f"BŁĄD {source.name}: {exc}", file=sys.stderr)
             errors.append({"source": source.name, "url": source.url, "error": str(exc)[:500]})
         time.sleep(SLEEP_BETWEEN_REQUESTS)
 
-    items, alerts = merge_items(existing, all_found)
+    items, alerts = merge_items(existing, found_sources)
     output = {
         "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "sources_checked": len(sources),
-        "found_this_run": len(all_found),
+        "found_this_run": len(items),
         "new_or_changed": len(alerts),
         "errors": errors,
         "items": items,
@@ -415,7 +599,7 @@ def main() -> int:
     DATA_FILE.write_text(encoded, encoding="utf-8")
     PUBLIC_FILE.write_text(encoded, encoding="utf-8")
     send_email(alerts)
-    print(f"Gotowe. Trafienia: {len(items)}, nowe/zmienione: {len(alerts)}, błędy: {len(errors)}")
+    print(f"Gotowe. Jednostki z trafieniami: {len(items)}, nowe/zmienione: {len(alerts)}, błędy: {len(errors)}")
     return 0
 
 
