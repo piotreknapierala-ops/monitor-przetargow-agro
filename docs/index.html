@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monitor przetargów Agro</title>
+  <style>
+    :root { --bg:#f4f6f3; --card:#fff; --text:#1c251d; --muted:#667069; --line:#dfe5df; --accent:#245b35; --warn:#8c5a00; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Arial, Helvetica, sans-serif; background:var(--bg); color:var(--text); }
+    header { background:#173e27; color:white; padding:24px max(20px, calc((100vw - 1400px)/2)); }
+    header h1 { margin:0 0 6px; font-size:28px; }
+    header p { margin:0; opacity:.82; }
+    main { max-width:1400px; margin:auto; padding:20px; }
+    .stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-bottom:16px; }
+    .stat,.panel { background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.04); }
+    .stat { padding:16px; }
+    .stat strong { display:block; font-size:26px; margin-top:6px; }
+    .muted { color:var(--muted); }
+    .panel { padding:14px; margin-bottom:16px; }
+    .filters { display:grid; grid-template-columns:2fr 1fr 1fr 1fr auto; gap:10px; align-items:end; }
+    label { display:block; font-size:12px; font-weight:bold; color:var(--muted); margin-bottom:5px; }
+    input,select,button { width:100%; min-height:40px; border:1px solid #cbd3cc; border-radius:8px; padding:8px 10px; background:white; font-size:14px; }
+    button { width:auto; cursor:pointer; background:var(--accent); color:white; border:none; padding:0 18px; font-weight:bold; }
+    .table-wrap { overflow:auto; background:white; border:1px solid var(--line); border-radius:12px; }
+    table { border-collapse:collapse; width:100%; min-width:1100px; }
+    th,td { text-align:left; padding:12px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { position:sticky; top:0; background:#edf2ed; font-size:12px; text-transform:uppercase; letter-spacing:.03em; }
+    tr:hover td { background:#fafcfa; }
+    a { color:#165b32; font-weight:bold; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .badge { display:inline-block; border-radius:999px; padding:4px 8px; font-size:12px; font-weight:bold; white-space:nowrap; background:#e6ece7; }
+    .badge.new { background:#d9f4df; color:#145826; }
+    .badge.changed { background:#fff0cc; color:#724800; }
+    .badge.open { background:#dcecff; color:#174d87; }
+    .score { font-weight:bold; }
+    .error { background:#fff1f1; color:#7a1b1b; padding:10px; border-radius:8px; margin-top:8px; }
+    .empty { padding:32px; text-align:center; color:var(--muted); }
+    @media(max-width:900px){ .stats{grid-template-columns:1fr 1fr}.filters{grid-template-columns:1fr 1fr}.filters>div:first-child{grid-column:1/-1} button{width:100%} }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Monitor przetargów Agro</h1>
+  <p>Obory, chlewnie, kurniki, indyczarnie, stajnie, hale, magazyny i infrastruktura ferm.</p>
+</header>
+<main>
+  <section class="stats">
+    <div class="stat"><span class="muted">Wszystkie trafienia</span><strong id="sAll">–</strong></div>
+    <div class="stat"><span class="muted">Otwarte</span><strong id="sOpen">–</strong></div>
+    <div class="stat"><span class="muted">Nowe/zmienione</span><strong id="sNew">–</strong></div>
+    <div class="stat"><span class="muted">Źródła sprawdzone</span><strong id="sSources">–</strong></div>
+  </section>
+
+  <section class="panel">
+    <div class="filters">
+      <div><label for="q">Szukaj</label><input id="q" placeholder="np. obora, magazyn, Wrocław"></div>
+      <div><label for="status">Status</label><select id="status"><option value="">Wszystkie</option><option>Otwarty</option><option>Nieustalony</option><option>Termin minął</option></select></div>
+      <div><label for="change">Zmiana</label><select id="change"><option value="">Wszystkie</option><option>Nowe</option><option>Zmienione</option><option>Bez zmian</option></select></div>
+      <div><label for="category">Jednostka</label><select id="category"><option value="">Wszystkie</option></select></div>
+      <button id="clear">Wyczyść</button>
+    </div>
+    <div id="meta" class="muted" style="margin-top:12px"></div>
+    <div id="errors"></div>
+  </section>
+
+  <section class="table-wrap">
+    <table>
+      <thead><tr><th>Zmiana</th><th>Zamawiający / źródło</th><th>Postępowanie</th><th>Region</th><th>Termin</th><th>Status</th><th>Dopasowanie</th><th>Wykryte słowa</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div id="empty" class="empty" hidden>Brak wyników dla wybranych filtrów.</div>
+  </section>
+</main>
+<script>
+let DATA={items:[],errors:[]};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=d=>d?new Date(d).toLocaleDateString('pl-PL'):'–';
+function render(){
+  const q=document.querySelector('#q').value.toLowerCase().trim();
+  const status=document.querySelector('#status').value;
+  const change=document.querySelector('#change').value;
+  const category=document.querySelector('#category').value;
+  const items=DATA.items.filter(x=>{
+    const hay=[x.title,x.source_name,x.region,x.snippet,(x.matched_keywords||[]).join(' ')].join(' ').toLowerCase();
+    return (!q||hay.includes(q))&&(!status||x.status===status)&&(!change||x.change_type===change)&&(!category||x.source_category===category);
+  });
+  document.querySelector('#rows').innerHTML=items.map(x=>{
+    const cb=x.change_type==='Nowe'?'new':x.change_type==='Zmienione'?'changed':'';
+    const sb=x.status==='Otwarty'?'open':'';
+    return `<tr>
+      <td><span class="badge ${cb}">${esc(x.change_type||'–')}</span></td>
+      <td><strong>${esc(x.source_name)}</strong><br><span class="muted">${esc(x.source_category||'')}</span></td>
+      <td><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a><br><span class="muted">${esc((x.snippet||'').slice(0,220))}</span></td>
+      <td>${esc(x.region||'–')}</td><td>${fmt(x.deadline)}</td>
+      <td><span class="badge ${sb}">${esc(x.status||'–')}</span></td>
+      <td class="score">${esc(x.score)}/100</td>
+      <td>${esc((x.matched_keywords||[]).join(', '))}</td>
+    </tr>`;
+  }).join('');
+  document.querySelector('#empty').hidden=items.length>0;
+}
+async function init(){
+  const res=await fetch(`data.json?v=${Date.now()}`,{cache:'no-store'}); DATA=await res.json();
+  document.querySelector('#sAll').textContent=DATA.items.length;
+  document.querySelector('#sOpen').textContent=DATA.items.filter(x=>x.status==='Otwarty').length;
+  document.querySelector('#sNew').textContent=DATA.items.filter(x=>['Nowe','Zmienione'].includes(x.change_type)).length;
+  document.querySelector('#sSources').textContent=DATA.sources_checked??0;
+  document.querySelector('#meta').textContent=`Ostatni skan: ${DATA.generated_at?new Date(DATA.generated_at).toLocaleString('pl-PL'):'jeszcze nie wykonano'} · trafienia w ostatnim skanie: ${DATA.found_this_run??0}`;
+  const cats=[...new Set(DATA.items.map(x=>x.source_category).filter(Boolean))].sort();
+  document.querySelector('#category').innerHTML='<option value="">Wszystkie</option>'+cats.map(x=>`<option>${esc(x)}</option>`).join('');
+  document.querySelector('#errors').innerHTML=(DATA.errors||[]).map(e=>`<div class="error"><strong>${esc(e.source)}</strong>: ${esc(e.error)}</div>`).join('');
+  render();
+}
+['q','status','change','category'].forEach(id=>document.querySelector('#'+id).addEventListener('input',render));
+document.querySelector('#clear').addEventListener('click',()=>{['q','status','change','category'].forEach(id=>document.querySelector('#'+id).value='');render();});
+init().catch(e=>{document.querySelector('#meta').textContent='Nie udało się wczytać danych: '+e.message;});
+</script>
+</body>
+</html>

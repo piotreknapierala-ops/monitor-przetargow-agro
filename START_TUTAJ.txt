@@ -1,0 +1,17 @@
+MONITOR PRZETARGÓW AGRO — WERSJA BEZ INSTALACJI
+
+NICZEGO NIE INSTALUJESZ NA KOMPUTERZE.
+Python i skaner uruchamiają się na serwerach GitHub. Ty używasz wyłącznie przeglądarki.
+
+1. Wejdź na https://github.com i załóż bezpłatne konto.
+2. Kliknij + -> New repository.
+3. Nazwij repozytorium: monitor-przetargow-agro i ustaw Public.
+4. W repozytorium kliknij Add file -> Upload files.
+5. Przeciągnij do okna GitHub CAŁĄ ZAWARTOŚĆ tego folderu, w tym: .github, config, data, docs, scraper.py, requirements.txt i README.md.
+6. Kliknij Commit changes.
+7. Wejdź: Settings -> Pages -> Source -> GitHub Actions.
+8. Wejdź: Settings -> Actions -> General -> Workflow permissions -> Read and write permissions -> Save.
+9. Wejdź: Actions -> Monitor przetargów Agro -> Run workflow -> Run workflow.
+10. Po zakończeniu: Settings -> Pages. Tam będzie adres Twojej strony.
+
+Nie uruchamiaj scraper.py na komputerze. Nie instaluj Pythona. Nie instaluj GitHub Desktop.
