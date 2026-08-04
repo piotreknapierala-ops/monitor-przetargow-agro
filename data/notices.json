@@ -1,82 +1,102 @@
 {
-  "generated_at": "2026-08-04T08:32:10+00:00",
+  "generated_at": "2026-08-04T09:00:39+00:00",
   "sources_checked": 68,
-  "found_this_run": 8,
-  "new_or_changed": 8,
+  "found_this_run": 16,
+  "units_with_hits": 9,
+  "new_or_changed": 16,
   "errors": [
-    {
-      "source": "Hodowla Zarodowa Zwierząt Żołędnica",
-      "url": "https://www.zolednica.pl/",
-      "error": "HTTPSConnectionPool(host='www.zolednica.pl', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.zolednica.pl'. (_ssl.c:1010)\")))"
-    },
-    {
-      "source": "Przedsiębiorstwo Rolniczo-Hodowlane Gałopol",
-      "url": "https://galopol.pl/",
-      "error": "HTTPSConnectionPool(host='galopol.pl', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'galopol.pl'. (_ssl.c:1010)\")))"
-    },
     {
       "source": "Stadnina Koni Racot",
       "url": "https://www.racot.pl/",
-      "error": "HTTPSConnectionPool(host='www.racot.pl', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.racot.pl', port=443) at 0x7fe9cabaa0f0>, 'Connection to www.racot.pl timed out. (connect timeout=18)'))"
-    },
-    {
-      "source": "Stadnina Koni Krasne",
-      "url": "https://www.stadninakrasne.com.pl/",
-      "error": "HTTPSConnectionPool(host='www.stadninakrasne.com.pl', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.stadninakrasne.com.pl', port=443) at 0x7fe9caba82c0>, 'Connection to www.stadninakrasne.com.pl timed out. (connect timeout=18)'))"
+      "error": "HTTPConnectionPool(host='racot.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='racot.pl', port=80) at 0x7f982b64ac90>, 'Connection to racot.pl timed out. (connect timeout=18)'))"
     },
     {
       "source": "Stadnina Koni w Dobrzyniewie",
       "url": "https://www.skdobrzyniewo.pl/",
-      "error": "403 Client Error: Forbidden for url: https://www.skdobrzyniewo.pl/"
-    },
-    {
-      "source": "Kombinat Rolny Kietrz",
-      "url": "https://kombinatkietrz.pl/",
-      "error": "HTTPSConnectionPool(host='kombinatkietrz.pl', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1010)')))"
-    },
-    {
-      "source": "Poznańska Hodowla Roślin",
-      "url": "https://phr.pl/",
-      "error": "HTTPSConnectionPool(host='phr.pl', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='phr.pl', port=443) at 0x7fe9c98602f0>, 'Connection to phr.pl timed out. (connect timeout=18)'))"
-    },
-    {
-      "source": "Przedsiębiorstwo Przemysłu Ziemniaczanego Trzemeszno",
-      "url": "https://www.ppz-trzemeszno.com.pl/",
-      "error": "HTTPSConnectionPool(host='www.ppz-trzemeszno.com.pl', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.ppz-trzemeszno.com.pl'. (_ssl.c:1010)\")))"
-    },
-    {
-      "source": "Instytut Hodowli i Aklimatyzacji Roślin PIB",
-      "url": "https://www.ihar.edu.pl/",
-      "error": "HTTPSConnectionPool(host='www.ihar.edu.pl', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.ihar.edu.pl'. (_ssl.c:1010)\")))"
+      "error": "403 Client Error: Forbidden for url: http://skdobrzyniewo.pl/"
     },
     {
       "source": "Instytut Ogrodnictwa PIB",
       "url": "https://www.inhort.pl/",
-      "error": "HTTPSConnectionPool(host='www.inhort.pl', port=443): Read timed out. (read timeout=18)"
-    },
-    {
-      "source": "Instytut Technologiczno-Przyrodniczy PIB",
-      "url": "https://www.itp.edu.pl/",
-      "error": "HTTPSConnectionPool(host='www.itp.edu.pl', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)')))"
-    },
-    {
-      "source": "Instytut Uprawy Nawożenia i Gleboznawstwa PIB",
-      "url": "https://www.iung.pulawy.pl/",
-      "error": "HTTPSConnectionPool(host='www.iung.pulawy.pl', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.iung.pulawy.pl'. (_ssl.c:1010)\")))"
-    },
-    {
-      "source": "Uniwersytet Przyrodniczy w Poznaniu",
-      "url": "https://puls.edu.pl/zp",
-      "error": "HTTPSConnectionPool(host='puls.edu.pl', port=443): Max retries exceeded with url: /zp (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)')))"
+      "error": "HTTPConnectionPool(host='inhort.pl', port=80): Read timed out. (read timeout=18)"
     }
   ],
   "items": [
     {
-      "id": "67f1bf6463bace901696",
+      "id": "4eeb066c44c6a896f8edfc18",
+      "source_name": "Stado Ogierów Starogard Gdański - Rzeczna",
+      "source_category": "stadnina",
+      "region": "pomorskie",
+      "title": "Warmińsko-mazurskie ogłasza przetarg na: PRZEBUDOWA TRZECH STAJNI Z BUDOWĄ NOWYCH BOKSÓW NA TERENIE KOMPLEKSU BUDYNKÓW STADNINY KONI W RZECZNEJ – dostawa i montaż boksów dla koni (przetarg nie jest zamówieniem publicznym) Miejsce realizacji: Rzeczna , dz.",
+      "url": "https://www.rzeczna.pl/index.php/205-przetarg-na-dostawe-i-montaz-boksow-dla-koni?tmpl=component&print=1&layout=default",
+      "source_page": "https://www.rzeczna.pl/index.php/205-przetarg-na-dostawe-i-montaz-boksow-dla-koni",
+      "published_date": "2026-08-03",
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 100,
+      "matched_keywords": [
+        "budow",
+        "przebudow",
+        "stajni"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "730a48acf7cc0d3a9e1b2dded3de4fce745dcb61c93b8bbe03472d091393f101",
+      "date_found": "2026-08-04T09:00:39+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:00:39+00:00"
+    },
+    {
+      "id": "b383638887c85db930c4f73e",
+      "source_name": "Hodowla Zarodowa Zwierząt Żołędnica",
+      "source_category": "OHZ",
+      "region": "Polska",
+      "title": "57/2026 przetarg: Rozbudowa obory w Zakrzewie",
+      "url": "https://www.zolednica.pl/index.php?option=com_content&view=article&id=1263:57-2026-przetarg-rozbudowa-obory-w-zakrzewie&catid=13&Itemid=114",
+      "source_page": "https://www.zolednica.pl/index.php?option=com_content&view=category&layout=blog&id=13&filter_tag%5B0%5D=&Itemid=114",
+      "published_date": "2026-07-16",
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 100,
+      "matched_keywords": [
+        "budow",
+        "obor",
+        "rozbudow"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "619198cbf2b5312a1aebec5c8211482cc440bbdd1d9560588d04a7a4485d15dd",
+      "date_found": "2026-08-04T09:00:39+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:00:39+00:00"
+    },
+    {
+      "id": "1909bde4223ea64b958de56e",
+      "source_name": "Hodowla Zarodowa Zwierząt Żołędnica",
+      "source_category": "OHZ",
+      "region": "Polska",
+      "title": "32/2026 przetarg: Rozbudowa silosu w Golinie Wielkiej",
+      "url": "https://www.zolednica.pl/index.php?option=com_content&view=article&id=1238:32-2026-przetarg-rozbudowa-silosu-w-golinie-wielkiej&catid=13&Itemid=114",
+      "source_page": "https://www.zolednica.pl/index.php?option=com_content&view=category&layout=blog&id=13&filter_tag%5B0%5D=&Itemid=114",
+      "published_date": "2026-05-15",
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 90,
+      "matched_keywords": [
+        "budow",
+        "rozbudow",
+        "silos"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "1f345e2db00b68b74e99429bfbb07e4aade30b20401d8f72faec0b389aa5df71",
+      "date_found": "2026-08-04T09:00:39+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:00:39+00:00"
+    },
+    {
+      "id": "0ec6f9775fed90527a87178d",
       "source_name": "Ośrodek Hodowli Zwierząt Zarodowych w Chodeczku",
       "source_category": "OHZ",
       "region": "kujawsko-pomorskie",
-      "title": "Opracowanie projektu architektoniczno-budowlanego i technicznego zmiany technologii utrzymania bydła wraz z urządzeniami technologicznymi oraz projektami branżowymi obory z halą udojową. (+4 inne pasujące postępowania)",
+      "title": "Opracowanie projektu architektoniczno-budowlanego i technicznego zmiany technologii utrzymania bydła wraz z urządzeniami technologicznymi oraz projektami branżowymi obory z halą udojową.",
       "url": "https://www.ohzz.chodeczek.pl/pl,przetarg,,535.html",
       "source_page": "https://www.ohzz.chodeczek.pl/pl,przetargi.html",
       "published_date": "2026-03-19",
@@ -85,21 +105,106 @@
       "score": 100,
       "matched_keywords": [
         "budow",
-        "chlewn",
-        "gnojowic",
         "hala udojowa",
-        "obor",
-        "zbiornik"
+        "obor"
       ],
-      "snippet": "Wykryto 5 pasujące postępowania. Pokazano najnowsze lub najlepiej dopasowane.",
-      "match_count": 5,
-      "fingerprint": "305285df5679093e5ce347361249c6dec529ef7b31b244c154741f0f4d4d0c6d",
-      "date_found": "2026-08-04T08:32:10+00:00",
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "2c9b18890970ea52834d4615ca931b461f16f356830c6a8b0ba61440645c1e9f",
+      "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Nowe",
-      "last_seen": "2026-08-04T08:32:10+00:00"
+      "last_seen": "2026-08-04T09:00:39+00:00"
     },
     {
-      "id": "79c273a8733bbb7272a8",
+      "id": "3f5d3ba2a40cf868d92c0617",
+      "source_name": "Ośrodek Hodowli Zwierząt Zarodowych w Chodeczku",
+      "source_category": "OHZ",
+      "region": "kujawsko-pomorskie",
+      "title": "Opracowanie projektu architektoniczno-budowlanego i technicznego z projektami branżowymi budowy dwóch zadaszonych zbiorników na gnojowicę.",
+      "url": "https://www.ohzz.chodeczek.pl/pl,przetarg,,529.html",
+      "source_page": "https://www.ohzz.chodeczek.pl/pl,przetargi.html",
+      "published_date": "2026-03-19",
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 88,
+      "matched_keywords": [
+        "budow",
+        "gnojowic",
+        "zbiornik"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "5540df4a299c015bbc630fb7527c0ca4b98041b5771e96cfca64505eb4dc1022",
+      "date_found": "2026-08-04T09:00:39+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:00:39+00:00"
+    },
+    {
+      "id": "1c265290740c4f1fff660a71",
+      "source_name": "Ośrodek Hodowli Zwierząt Zarodowych w Chodeczku",
+      "source_category": "OHZ",
+      "region": "kujawsko-pomorskie",
+      "title": "Opracowanie projektu architektoniczno-budowlanego i technicznego zmiany technologii utrzymania bydła wraz z urządzeniami technologicznymi oraz projektami branżowymi cielętnika-chlewni.",
+      "url": "https://www.ohzz.chodeczek.pl/pl,przetarg,,538.html",
+      "source_page": "https://www.ohzz.chodeczek.pl/pl,przetargi.html",
+      "published_date": "2026-03-19",
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 79,
+      "matched_keywords": [
+        "budow",
+        "chlewn"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "7ff836c4e02554efaad4a4d4f9c511b6584511666726a92b6baa627686eb614a",
+      "date_found": "2026-08-04T09:00:39+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:00:39+00:00"
+    },
+    {
+      "id": "940f5f1445ca300c55aa2468",
+      "source_name": "Ośrodek Hodowli Zwierząt Zarodowych w Chodeczku",
+      "source_category": "OHZ",
+      "region": "kujawsko-pomorskie",
+      "title": "Opracowanie projektu architektoniczno-budowlanego i technicznego zmiany technologii utrzymania bydła wraz z urządzeniami technologicznymi oraz projektami branżowymi starej obory.",
+      "url": "https://www.ohzz.chodeczek.pl/pl,przetarg,,532.html",
+      "source_page": "https://www.ohzz.chodeczek.pl/pl,przetargi.html",
+      "published_date": "2026-03-19",
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 79,
+      "matched_keywords": [
+        "budow",
+        "obor"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "6352a78aa290911b2474f138f3c8711cad199215f7e93807270a5c3e7f5b494b",
+      "date_found": "2026-08-04T09:00:39+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:00:39+00:00"
+    },
+    {
+      "id": "65bde3dc221dcd60923aad72",
+      "source_name": "Ośrodek Hodowli Zwierząt Zarodowych w Chodeczku",
+      "source_category": "OHZ",
+      "region": "kujawsko-pomorskie",
+      "title": "Opracowanie projektu architektoniczno-budowlanego i technicznego zmiany technologii utrzymania bydła wraz z urządzeniami technologicznymi oraz projektami branżowymi nowej obory.",
+      "url": "https://www.ohzz.chodeczek.pl/pl,przetarg,,531.html",
+      "source_page": "https://www.ohzz.chodeczek.pl/pl,przetargi.html",
+      "published_date": "2026-03-19",
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 79,
+      "matched_keywords": [
+        "budow",
+        "obor"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "dec52bb340098d1c7830f9c0d1189bd160434b264049e31c2958e6fe51c32596",
+      "date_found": "2026-08-04T09:00:39+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:00:39+00:00"
+    },
+    {
+      "id": "69adbd8572148ae46e0f1d80",
       "source_name": "Ośrodek Hodowli Zarodowej Głogówek",
       "source_category": "OHZ",
       "region": "Polska",
@@ -115,20 +220,19 @@
         "moderniz",
         "wentylac"
       ],
-      "snippet": "Wykryto 1 pasujące postępowanie. Kliknij, aby przejść do źródła.",
-      "match_count": 1,
-      "fingerprint": "0c23239baa5b0786cfe36668531fea55ad3e37d04507c3f8c36da862229a4284",
-      "date_found": "2026-08-04T08:32:10+00:00",
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "beb8f9bfab30efdd1a23cb26a805df686de49c532ab22bac4ad8d06ede4503ca",
+      "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Nowe",
-      "last_seen": "2026-08-04T08:32:10+00:00"
+      "last_seen": "2026-08-04T09:00:39+00:00"
     },
     {
-      "id": "381f990f07a05a23ce9b",
+      "id": "b71514180a7a1c8c5244de7b",
       "source_name": "Stado Ogierów Starogard Gdański - Rzeczna",
       "source_category": "stadnina",
       "region": "pomorskie",
-      "title": "Warmińsko-mazurskie ogłasza przetarg na: PRZEBUDOWA TRZECH STAJNI Z BUDOWĄ NOWYCH BOKSÓW NA TERENIE KOMPLEKSU BUDYNKÓW STADNINY KONI W RZECZNEJ – dostawa i montaż boksów dla koni Czytaj więcej: Przetarg na dostawę i montaż boksów dla koni (+2 inne pasujące postępowania)",
-      "url": "https://www.rzeczna.pl/index.php/205-przetarg-na-dostawe-i-montaz-boksow-dla-koni",
+      "title": "Czytaj więcej: Przetarg na PRZEBUDOWĘ TRZECH STAJNI",
+      "url": "https://www.rzeczna.pl/index.php/177-przetarg-na-przebudowa-trzech-stajni",
       "source_page": "https://www.rzeczna.pl/index.php",
       "published_date": null,
       "deadline": null,
@@ -140,15 +244,38 @@
         "roboty budowlane",
         "stajni"
       ],
-      "snippet": "Wykryto 3 pasujące postępowania. Pokazano najnowsze lub najlepiej dopasowane.",
-      "match_count": 3,
-      "fingerprint": "80a4e57ebcdfcc7726bd08b342a17dc0b3fa9a92f68880d6a76ba466a58a55cb",
-      "date_found": "2026-08-04T08:32:10+00:00",
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "ca96387ac7f97d2cbaa5d53c0da6dc307dd8b6acaa92abb4f0bb05fc98b364f5",
+      "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Nowe",
-      "last_seen": "2026-08-04T08:32:10+00:00"
+      "last_seen": "2026-08-04T09:00:39+00:00"
     },
     {
-      "id": "98b6b146012a2acb6bf9",
+      "id": "ef54725f8dfffb8288619477",
+      "source_name": "Stado Ogierów Starogard Gdański - Rzeczna",
+      "source_category": "stadnina",
+      "region": "pomorskie",
+      "title": "Przetarg na PRZEBUDOWĘ TRZECH STAJNI",
+      "url": "https://www.rzeczna.pl/index.php/177-przetarg-na-przebudowa-trzech-stajni",
+      "source_page": "https://www.rzeczna.pl/index.php/177-przetarg-na-przebudowa-trzech-stajni",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 100,
+      "matched_keywords": [
+        "budow",
+        "przebudow",
+        "roboty budowlane",
+        "stajni"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "75842b6c63ba745f6320b20256144a387424544602c9860cc668017f1471b850",
+      "date_found": "2026-08-04T09:00:39+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:00:39+00:00"
+    },
+    {
+      "id": "038840717a6f1e92e8947859",
       "source_name": "Hodowla Zwierząt i Nasiennictwo Roślin Polanowice",
       "source_category": "KGS",
       "region": "kujawsko-pomorskie",
@@ -164,15 +291,14 @@
         "obor",
         "obora"
       ],
-      "snippet": "Wykryto 1 pasujące postępowanie. Kliknij, aby przejść do źródła.",
-      "match_count": 1,
-      "fingerprint": "ce1aacfcef62091af6924bf7fd5dc1d39c93e96ad2274dabe4774a5adf11893a",
-      "date_found": "2026-08-04T08:32:10+00:00",
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "924e138066c2d485a3e821806d26aa2edfc06dbc0b855bf4f854ba2b5c5f069b",
+      "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Nowe",
-      "last_seen": "2026-08-04T08:32:10+00:00"
+      "last_seen": "2026-08-04T09:00:39+00:00"
     },
     {
-      "id": "5625e9763989214ddf41",
+      "id": "abf6815a62062386883cca1b",
       "source_name": "Stadnina Koni Prudnik",
       "source_category": "stadnina",
       "region": "opolskie",
@@ -189,15 +315,14 @@
         "moderniz",
         "roboty budowlane"
       ],
-      "snippet": "Wykryto 1 pasujące postępowanie. Kliknij, aby przejść do źródła.",
-      "match_count": 1,
-      "fingerprint": "00a45eefe371e58416017cc60b65193fac589916e834d124f31e09f04215008f",
-      "date_found": "2026-08-04T08:32:10+00:00",
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "6a2f13be2c96e19b8ed555a3bd22ded724230635b3a58125413d8c03e4d9824c",
+      "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Nowe",
-      "last_seen": "2026-08-04T08:32:10+00:00"
+      "last_seen": "2026-08-04T09:00:39+00:00"
     },
     {
-      "id": "20e9b4c3f68d571b384c",
+      "id": "43ccc613bed8c2bc9c67f342",
       "source_name": "ELEWARR",
       "source_category": "KGS",
       "region": "Polska",
@@ -213,15 +338,14 @@
         "remont",
         "silos"
       ],
-      "snippet": "Wykryto 1 pasujące postępowanie. Kliknij, aby przejść do źródła.",
-      "match_count": 1,
-      "fingerprint": "1aabb9c35279c602e2d3a185edf143097d08f9eda797009adbab6c2b8c4ca0aa",
-      "date_found": "2026-08-04T08:32:10+00:00",
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "7754ba53eb2d539fd2c6e6f01c1e52016341142bc915ed1c9492ad3f66434281",
+      "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Nowe",
-      "last_seen": "2026-08-04T08:32:10+00:00"
+      "last_seen": "2026-08-04T09:00:39+00:00"
     },
     {
-      "id": "b8aa287b4771b4e85206",
+      "id": "f6fa5ada0f6daa5b8f914130",
       "source_name": "Stado Ogierów w Łącku",
       "source_category": "stadnina",
       "region": "mazowieckie",
@@ -236,15 +360,14 @@
         "moderniz",
         "stajni"
       ],
-      "snippet": "Wykryto 1 pasujące postępowanie. Kliknij, aby przejść do źródła.",
-      "match_count": 1,
-      "fingerprint": "3ea37fbc99f4221203d432f8318df8aa897fb8edee1f63e8ef828d57ecff61f3",
-      "date_found": "2026-08-04T08:32:10+00:00",
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "36d5f9269d123657a6e5f27fb1acee55c62e153ff30879adcd96f8876efcd046",
+      "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Nowe",
-      "last_seen": "2026-08-04T08:32:10+00:00"
+      "last_seen": "2026-08-04T09:00:39+00:00"
     },
     {
-      "id": "055a18644a82f772f08a",
+      "id": "8c4ecdfff558cd50b1bdab14",
       "source_name": "Krajowa Grupa Spożywcza - ogłoszenia",
       "source_category": "KGS",
       "region": "Polska",
@@ -260,12 +383,11 @@
         "moderniz",
         "remont"
       ],
-      "snippet": "Wykryto 1 pasujące postępowanie. Kliknij, aby przejść do źródła.",
-      "match_count": 1,
-      "fingerprint": "d12ed623729bb3c7071d7424f8ca337cdea257af906fc031e07c0fb36704f2fb",
-      "date_found": "2026-08-04T08:32:10+00:00",
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "5ec80effd425fd5f819085e97ada60602d6804c68bb196a29a50fc4f846b5886",
+      "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Nowe",
-      "last_seen": "2026-08-04T08:32:10+00:00"
+      "last_seen": "2026-08-04T09:00:39+00:00"
     }
   ]
 }
