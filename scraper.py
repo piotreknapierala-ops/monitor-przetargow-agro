@@ -18,6 +18,7 @@ from typing import Iterable
 from urllib.parse import urldefrag, urljoin, urlparse
 
 import requests
+import urllib3
 from bs4 import BeautifulSoup, Tag
 from dateutil import parser as date_parser
 
@@ -27,6 +28,7 @@ DATA_FILE = ROOT / "data" / "notices.json"
 PUBLIC_FILE = ROOT / "docs" / "data.json"
 
 REQUEST_TIMEOUT = 18
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 MAX_LISTING_PAGES_PER_SOURCE = 5
 MAX_LINKS_PER_PAGE = 250
 SLEEP_BETWEEN_REQUESTS = 0.25
@@ -193,14 +195,60 @@ def load_existing() -> dict:
         return {"items": []}
 
 
+def candidate_url_variants(url: str) -> list[str]:
+    """Zwraca warianty adresu dla starych serwisów z błędnym SSL lub www."""
+    parsed = urlparse(url)
+    host = parsed.netloc
+    path = parsed.path or "/"
+    query = f"?{parsed.query}" if parsed.query else ""
+    hosts = [host]
+    if host.startswith("www."):
+        hosts.append(host[4:])
+    elif host:
+        hosts.append("www." + host)
+
+    variants: list[str] = []
+    for scheme in [parsed.scheme or "https", "https", "http"]:
+        for candidate_host in hosts:
+            candidate = f"{scheme}://{candidate_host}{path}{query}"
+            if candidate not in variants:
+                variants.append(candidate)
+    return variants
+
+
 def fetch(session: requests.Session, url: str) -> tuple[str, str]:
-    response = session.get(url, timeout=REQUEST_TIMEOUT, allow_redirects=True)
-    response.raise_for_status()
-    ctype = response.headers.get("content-type", "").lower()
-    if "text/html" not in ctype and "application/xhtml" not in ctype and not ctype.startswith("text/"):
-        return response.url, ""
-    response.encoding = response.apparent_encoding or response.encoding
-    return response.url, response.text
+    """Pobiera HTML; przy wadliwym certyfikacie próbuje bez jego weryfikacji."""
+    last_exc: Exception | None = None
+    for candidate in candidate_url_variants(url):
+        for verify in (True, False):
+            try:
+                response = session.get(
+                    candidate,
+                    timeout=REQUEST_TIMEOUT,
+                    allow_redirects=True,
+                    verify=verify,
+                )
+                response.raise_for_status()
+                ctype = response.headers.get("content-type", "").lower()
+                if (
+                    "text/html" not in ctype
+                    and "application/xhtml" not in ctype
+                    and not ctype.startswith("text/")
+                ):
+                    return response.url, ""
+                response.encoding = response.apparent_encoding or response.encoding
+                return response.url, response.text
+            except (
+                requests.exceptions.SSLError,
+                requests.exceptions.ConnectionError,
+                requests.exceptions.Timeout,
+                requests.exceptions.HTTPError,
+            ) as exc:
+                last_exc = exc
+                continue
+    if last_exc:
+        raise last_exc
+    raise requests.RequestException(f"Nie udało się pobrać {url}")
 
 
 def is_listing_link(anchor_text: str, url: str) -> bool:
@@ -413,10 +461,14 @@ def discover_listing_urls(soup: BeautifulSoup, final_url: str) -> list[str]:
     return urls[:MAX_LISTING_PAGES_PER_SOURCE]
 
 
-def scan_source(session: requests.Session, source: Source) -> dict | None:
+def scan_source(session: requests.Session, source: Source) -> list[dict]:
+    """
+    Zwraca osobny rekord dla każdego rzeczywistego postępowania.
+    Załączniki, formularze, SWZ i odpowiedzi pozostają zgrupowane pod postępowaniem.
+    """
     final_url, home_html = fetch(session, source.url)
     if not home_html:
-        return None
+        return []
     home = BeautifulSoup(home_html, "lxml")
     listing_urls = discover_listing_urls(home, final_url)
 
@@ -451,62 +503,85 @@ def scan_source(session: requests.Session, source: Source) -> dict | None:
                 candidates.append(candidate)
 
     if not candidates:
-        return None
+        return []
 
     deduped: dict[str, Candidate] = {}
     for candidate in candidates:
         key = candidate_key(candidate)
         current = deduped.get(key)
-        if current is None or candidate.score > current.score:
+        if current is None:
             deduped[key] = candidate
+        else:
+            current_specific = current.url != current.listing_url
+            candidate_specific = candidate.url != candidate.listing_url
+            if (
+                candidate.score > current.score
+                or (candidate.score == current.score and candidate_specific and not current_specific)
+                or (
+                    candidate.score == current.score
+                    and candidate.published_date
+                    and (not current.published_date or candidate.published_date > current.published_date)
+                )
+            ):
+                deduped[key] = candidate
 
     unique = list(deduped.values())
-    unique.sort(key=lambda c: (
-        bool(c.deadline and c.deadline >= date.today().isoformat()),
-        c.published_date or "",
-        c.score,
-    ), reverse=True)
-
-    top = unique[0]
-    deadlines = sorted({c.deadline for c in unique if c.deadline and c.deadline >= date.today().isoformat()})
-    deadline = deadlines[0] if deadlines else top.deadline
-    status = "Otwarty" if deadline and deadline >= date.today().isoformat() else "Do sprawdzenia"
-    published_dates = [c.published_date for c in unique if c.published_date]
-    published = max(published_dates) if published_dates else None
-
-    count = len(unique)
-    title = top.title if count == 1 else f"{top.title} (+{count - 1} inne pasujące postępowania)"
-    snippet = (
-        "Wykryto 1 pasujące postępowanie. Kliknij, aby przejść do źródła."
-        if count == 1 else
-        f"Wykryto {count} pasujące postępowania. Pokazano najnowsze lub najlepiej dopasowane."
+    unique.sort(
+        key=lambda c: (
+            bool(c.deadline and c.deadline >= date.today().isoformat()),
+            c.published_date or "",
+            c.score,
+        ),
+        reverse=True,
     )
-    fingerprint_payload = [
-        {"title": candidate.title, "url": candidate.url, "deadline": candidate.deadline}
-        for candidate in unique[:10]
-    ]
-    fingerprint = hashlib.sha256(
-        json.dumps(fingerprint_payload, ensure_ascii=False, sort_keys=True).encode("utf-8")
-    ).hexdigest()
 
-    source_id = hashlib.sha256(normalize_text(source.name + " " + source.url).encode("utf-8")).hexdigest()[:20]
-    return {
-        "id": source_id,
-        "source_name": source.name,
-        "source_category": source.category,
-        "region": source.region,
-        "title": title,
-        "url": top.url or top.listing_url,
-        "source_page": top.listing_url,
-        "published_date": published,
-        "deadline": deadline,
-        "status": status,
-        "score": top.score,
-        "matched_keywords": sorted({word for candidate in unique for word in candidate.matched})[:12],
-        "snippet": snippet,
-        "match_count": count,
-        "fingerprint": fingerprint,
-    }
+    source_id = hashlib.sha256(
+        normalize_text(source.name + " " + source.url).encode("utf-8")
+    ).hexdigest()[:16]
+
+    items: list[dict] = []
+    for candidate in unique:
+        proceeding_key = candidate_key(candidate)
+        proceeding_id = hashlib.sha256(
+            f"{source_id}|{proceeding_key}".encode("utf-8")
+        ).hexdigest()[:24]
+        status = (
+            "Otwarty"
+            if candidate.deadline and candidate.deadline >= date.today().isoformat()
+            else "Do sprawdzenia"
+        )
+        fingerprint = hashlib.sha256(
+            json.dumps(
+                {
+                    "title": candidate.title,
+                    "url": candidate.url,
+                    "deadline": candidate.deadline,
+                    "published_date": candidate.published_date,
+                },
+                ensure_ascii=False,
+                sort_keys=True,
+            ).encode("utf-8")
+        ).hexdigest()
+
+        items.append(
+            {
+                "id": proceeding_id,
+                "source_name": source.name,
+                "source_category": source.category,
+                "region": source.region,
+                "title": candidate.title,
+                "url": candidate.url or candidate.listing_url,
+                "source_page": candidate.listing_url,
+                "published_date": candidate.published_date,
+                "deadline": candidate.deadline,
+                "status": status,
+                "score": candidate.score,
+                "matched_keywords": candidate.matched[:12],
+                "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+                "fingerprint": fingerprint,
+            }
+        )
+    return items
 
 
 def merge_items(existing: dict, found: Iterable[dict]) -> tuple[list[dict], list[dict]]:
@@ -545,7 +620,7 @@ def send_email(alerts: list[dict]) -> None:
     if not alerts or not user or not password or not recipient:
         return
 
-    lines = ["Nowe lub zmienione źródła z pasującymi postępowaniami:\n"]
+    lines = ["Nowe lub zmienione postępowania pasujące do profilu Agro:\n"]
     for item in alerts[:25]:
         lines.append(
             f"- [{item.get('change_type')}] {item.get('source_name')}: {item.get('title')}\n"
@@ -554,7 +629,7 @@ def send_email(alerts: list[dict]) -> None:
         )
 
     message = EmailMessage()
-    message["Subject"] = f"Monitor przetargów Agro: {len(alerts)} nowych/zmienionych źródeł"
+    message["Subject"] = f"Monitor przetargów Agro: {len(alerts)} nowych/zmienionych postępowań"
     message["From"] = user
     message["To"] = recipient
     message.set_content("\n".join(lines))
@@ -569,28 +644,29 @@ def main() -> int:
     existing = load_existing()
     session = requests.Session()
     session.headers.update({
-        "User-Agent": "Mozilla/5.0 (compatible; AgroTenderMonitor/2.0; +https://github.com/)",
+        "User-Agent": "Mozilla/5.0 (compatible; AgroTenderMonitor/3.0; +https://github.com/)",
         "Accept-Language": "pl-PL,pl;q=0.9,en;q=0.7",
     })
 
-    found_sources: list[dict] = []
+    found_items: list[dict] = []
     errors: list[dict] = []
     for source in sources:
         try:
             print(f"Sprawdzam: {source.name} -> {source.url}")
-            item = scan_source(session, source)
-            if item:
-                found_sources.append(item)
+            source_items = scan_source(session, source)
+            found_items.extend(source_items)
         except Exception as exc:  # jeden niedziałający serwis nie zatrzymuje monitora
             print(f"BŁĄD {source.name}: {exc}", file=sys.stderr)
-            errors.append({"source": source.name, "url": source.url, "error": str(exc)[:500]})
+            errors.append({"source": source.name, "url": source.url, "error": str(exc)[:260]})
         time.sleep(SLEEP_BETWEEN_REQUESTS)
 
-    items, alerts = merge_items(existing, found_sources)
+    items, alerts = merge_items(existing, found_items)
+    units_with_hits = len({item.get("source_name") for item in items})
     output = {
         "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "sources_checked": len(sources),
         "found_this_run": len(items),
+        "units_with_hits": units_with_hits,
         "new_or_changed": len(alerts),
         "errors": errors,
         "items": items,
@@ -599,7 +675,7 @@ def main() -> int:
     DATA_FILE.write_text(encoded, encoding="utf-8")
     PUBLIC_FILE.write_text(encoded, encoding="utf-8")
     send_email(alerts)
-    print(f"Gotowe. Jednostki z trafieniami: {len(items)}, nowe/zmienione: {len(alerts)}, błędy: {len(errors)}")
+    print(f"Gotowe. Postępowania: {len(items)}, jednostki: {units_with_hits}, nowe/zmienione: {len(alerts)}, błędy: {len(errors)}")
     return 0
 
 
