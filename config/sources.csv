@@ -1,5 +1,69 @@
 name,url,category,region,active
-OHZ Lubiana,https://ohzlubiana.pl/przetargi/,OHZ,zachodniopomorskie,1
-OHZ Dębołęka,https://hodowladeboleka.pl/ogloszenia-i-przetargi/,OHZ,łódzkie,1
+KOWR - wykaz spółek nadzorowanych,https://www.gov.pl/web/kowr/spolki,KOWR,Polska,1
+PlantiCo - Hodowla i Nasiennictwo Ogrodnicze Zielonki,https://www.plantico.pl/,KOWR,Polska,1
+Ośrodek Hodowli Zarodowej Osięciny,https://ohzosieciny.com.pl/,OHZ,Polska,1
+Ośrodek Hodowli Zarodowej Głogówek,https://www.ohz-glogowek.pl/,OHZ,Polska,1
+Hodowla Zwierząt Zarodowych Osowa Sień,https://www.hodowlazwierzat.pl/,OHZ,Polska,1
+Ośrodek Hodowli Zarodowej Gajewo,https://ohzgajewo.pl/,OHZ,Polska,1
+Mścice Ośrodek Hodowli Zarodowej,https://www.ohzmscice.com.pl/,OHZ,Polska,1
+Hodowla Zarodowa Zwierząt Żołędnica,https://www.zolednica.pl/,OHZ,Polska,1
+Ośrodek Hodowli Zarodowej w Kamieńcu Ząbkowickim,https://www.ohz-kamieniec.pl/,OHZ,Polska,1
+Ośrodek Hodowli Zarodowej Dębołęka,https://hodowladeboleka.pl/ogloszenia-i-przetargi/,OHZ,łódzkie,1
+Ośrodek Hodowli Zarodowej Garzyn,https://garzyn.pl/,OHZ,wielkopolskie,1
+Ośrodek Hodowli Zarodowej w Osieku,https://www.ohzosiek.pl/,OHZ,małopolskie,1
+Ośrodek Hodowli Zarodowej Lubiana,https://ohzlubiana.pl/przetargi/,OHZ,zachodniopomorskie,1
+Ośrodek Hodowli Zwierząt Zarodowych w Chodeczku,https://www.ohzz.chodeczek.pl/,OHZ,kujawsko-pomorskie,1
+Ośrodek Hodowli Zarodowej Bobrowniki,https://ohzbobrowniki.pl/,OHZ,Polska,1
+Gospodarstwo Rolno-Hodowlane Żydowo,https://www.grh-zydowo.pl/,OHZ,wielkopolskie,1
+Ośrodek Hodowli Zarodowej Przerzeczyn Zdrój,https://www.przerzeczyn.com.pl/,OHZ,dolnośląskie,1
+Przedsiębiorstwo Rolniczo-Hodowlane Gałopol,https://galopol.pl/,OHZ,wielkopolskie,1
+Przedsiębiorstwo Rolne Długie Stare,https://dlugiestare.com.pl/,OHZ,wielkopolskie,1
+Stadnina Koni Janów Podlaski,https://skjanow.pl/,stadnina,lubelskie,1
+Stadnina Koni Michałów,https://www.stadninamichalow.pl/,stadnina,świętokrzyskie,1
+Stadnina Koni Racot,https://www.racot.pl/,stadnina,wielkopolskie,1
+Stadnina Koni Krasne,https://www.stadninakrasne.com.pl/,stadnina,mazowieckie,1
+Stadnina Koni Liski,https://www.skliski.pl/,stadnina,warmińsko-mazurskie,1
+Stado Ogierów Starogard Gdański - Rzeczna,https://www.rzeczna.pl/,stadnina,pomorskie,1
+Stadnina Koni Nowe Jankowice,https://www.stadninajankowice.pl/,stadnina,kujawsko-pomorskie,1
+Stadnina Koni w Dobrzyniewie,https://www.skdobrzyniewo.pl/,stadnina,podlaskie,1
+Stadnina Koni Pępowo,https://www.stadninapepowo.com/,stadnina,wielkopolskie,1
+Stadnina Koni Iwno,https://www.sk-iwno.com.pl/,stadnina,wielkopolskie,1
+Stadnina Koni Prudnik,https://www.skprudnik.eu/,stadnina,opolskie,1
+Stadnina Koni Nowielice,https://www.nowielice.pl/,stadnina,zachodniopomorskie,1
+Stado Ogierów w Łącku,https://stadoogierow.pl/,stadnina,mazowieckie,1
+Krajowa Grupa Spożywcza - ogłoszenia,https://bip.kgssa.pl/1377%2Cogloszenia,KGS,Polska,1
+DANKO Hodowla Roślin,https://danko.pl/glowna/przetargi/,KGS,Polska,1
+ELEWARR,https://elewarr.pl/,KGS,Polska,1
+Fabryka Cukierków Pszczółka,https://pszczolka.pl/,KGS,lubelskie,1
+Hodowla Zwierząt i Nasiennictwo Roślin Polanowice,https://polanowice.com.pl/,KGS,kujawsko-pomorskie,1
+Kombinat Rolny Kietrz,https://kombinatkietrz.pl/,KGS,opolskie,1
+Kutnowska Hodowla Buraka Cukrowego,https://khbc.pl/,KGS,łódzkie,1
+Małopolska Hodowla Roślin,https://www.mhr.com.pl/,KGS,małopolskie,1
+Pomorsko-Mazurska Hodowla Ziemniaka,https://pmhz.pl/,KGS,pomorskie,1
+Poznańska Hodowla Roślin,https://phr.pl/,KGS,wielkopolskie,1
+Przedsiębiorstwo Przemysłu Ziemniaczanego Trzemeszno,https://www.ppz-trzemeszno.com.pl/,KGS,wielkopolskie,1
+Przedsiębiorstwo Zbożowo-Młynarskie PZZ w Stoisławiu,https://www.stoislaw.com.pl/,KGS,zachodniopomorskie,1
+Zamojskie Zakłady Zbożowe,https://www.zzz.com.pl/,KGS,lubelskie,1
+Instytut Biotechnologii Przemysłu Rolno-Spożywczego PIB,https://www.ibprs.pl/,instytut,mazowieckie,1
+Instytut Ekonomiki Rolnictwa i Gospodarki Żywnościowej PIB,https://www.ierigz.waw.pl/,instytut,mazowieckie,1
+Instytut Hodowli i Aklimatyzacji Roślin PIB,https://www.ihar.edu.pl/,instytut,mazowieckie,1
+Instytut Ochrony Roślin PIB,https://www.ior.poznan.pl/,instytut,wielkopolskie,1
+Instytut Ogrodnictwa PIB,https://www.inhort.pl/,instytut,łódzkie,1
+Instytut Rybactwa Śródlądowego PIB,https://www.infish.com.pl/,instytut,warmińsko-mazurskie,1
+Instytut Technologiczno-Przyrodniczy PIB,https://www.itp.edu.pl/,instytut,mazowieckie,1
+Instytut Uprawy Nawożenia i Gleboznawstwa PIB,https://www.iung.pulawy.pl/,instytut,lubelskie,1
+Instytut Włókien Naturalnych i Roślin Zielarskich PIB,https://www.iwnirz.pl/,instytut,wielkopolskie,1
+Instytut Zootechniki PIB,https://www.izoo.krakow.pl/,instytut,małopolskie,1
+Morski Instytut Rybacki PIB,https://mir.gdynia.pl/,instytut,pomorskie,1
+Państwowy Instytut Weterynaryjny PIB,https://www.piwet.pulawy.pl/,instytut,lubelskie,1
+Uniwersytet Przyrodniczy w Lublinie,https://up.lublin.pl/bip/zamowienia-publiczne/,uczelnia,lubelskie,1
+Uniwersytet Przyrodniczy w Poznaniu,https://puls.edu.pl/zp,uczelnia,wielkopolskie,1
+Uniwersytet Rolniczy im. Hugona Kołłątaja w Krakowie,https://platformazakupowa.pl/pn/urk/proceedings,uczelnia,małopolskie,1
+Szkoła Główna Gospodarstwa Wiejskiego w Warszawie,https://bip.sggw.edu.pl/artykuly/ogloszenia-dotyczace-zamowien-publicznych-aktualne,uczelnia,mazowieckie,1
 Uniwersytet Przyrodniczy we Wrocławiu - roboty budowlane,https://bip.upwr.edu.pl/zamowienia-publiczne/zamowienia-powyzej-170000-zl/roboty-budowlane,uczelnia,dolnośląskie,1
-KOWR - spółki nadzorowane,https://www.gov.pl/web/kowr/spolki,KOWR,Polska,1
+Politechnika Bydgoska im. Jana i Jędrzeja Śniadeckich,https://bip.pbs.edu.pl/artykuly/zamowienia-publiczne-pbs,uczelnia,kujawsko-pomorskie,1
+Uniwersytet w Siedlcach,https://bip.uws.edu.pl/,uczelnia,mazowieckie,1
+Uniwersytet Warmińsko-Mazurski w Olsztynie,https://uwm.edu.pl/uniwersytet/zamowienia-publiczne,uczelnia,warmińsko-mazurskie,1
+Zachodniopomorski Uniwersytet Technologiczny w Szczecinie,https://zamowienia.zut.edu.pl/,uczelnia,zachodniopomorskie,1
+COBORU - aktualne zamówienia wszystkich stacji i zakładów,https://bip.coboru.gov.pl/zamowienia_publ,COBORU,Polska,1
+COBORU - zapytania ofertowe wszystkich stacji i zakładów,https://bip.coboru.gov.pl/zapytania_ofertowe,COBORU,Polska,1
