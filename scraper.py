@@ -489,6 +489,52 @@ def scan_source(session: requests.Session, source: Source) -> list[dict]:
             unwanted.decompose()
 
         main = page.find("main") or page.find(id=re.compile(r"content|main", re.I)) or page.body or page
+
+        # Najpierw czytamy bezpośrednio nagłówki postępowań. To zabezpiecza strony,
+        # na których jeden wpis ma bardzo dużo załączników (np. OHZ Lubiana),
+        # przez co cały kontener wpisu jest zbyt obszerny dla zwykłej analizy bloków.
+        for heading in page.find_all(["h1", "h2", "h3", "h4", "h5"], limit=180):
+            label = clean_text(heading.get_text(" ", strip=True), 320)
+            if not meaningful_label(label):
+                continue
+
+            score, matched = score_candidate(label, real_url)
+            if score < 60:
+                continue
+
+            link = heading.find("a", href=True)
+            href = normalize_url(real_url, link.get("href")) if link else real_url
+            if href and is_document_url(href):
+                href = real_url
+
+            # Data zwykle znajduje się tuż obok nagłówka. Pobieramy tylko krótki
+            # fragment otoczenia, aby nie domieszać nazw dziesiątek załączników.
+            context_node = heading.find_parent("article") or heading.parent
+            context = clean_text(
+                context_node.get_text(" ", strip=True) if isinstance(context_node, Tag) else label,
+                900,
+            )
+            dates = parse_dates(context)
+            deadline = extract_deadline(context)
+            today = date.today()
+            parsed_dates = [date.fromisoformat(x) for x in dates]
+            future_deadline = bool(deadline and deadline >= today.isoformat())
+            if parsed_dates and max(parsed_dates) < today - timedelta(days=MAX_AGE_DAYS) and not future_deadline:
+                continue
+            past_dates = [d for d in dates if d <= today.isoformat()]
+            published = max(past_dates) if past_dates else (dates[0] if dates else None)
+
+            candidates.append(Candidate(
+                title=label,
+                url=href or real_url,
+                listing_url=real_url,
+                context=context,
+                score=score,
+                matched=matched,
+                published_date=published,
+                deadline=deadline,
+            ))
+
         for anchor in main.find_all("a", href=True)[:MAX_LINKS_PER_PAGE]:
             block = block_for_anchor(anchor)
             if block is None:
