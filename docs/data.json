@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-08-04T09:30:02+00:00",
+  "generated_at": "2026-08-04T09:48:46+00:00",
   "sources_checked": 68,
-  "found_this_run": 16,
-  "units_with_hits": 9,
-  "new_or_changed": 0,
+  "found_this_run": 28,
+  "units_with_hits": 12,
+  "new_or_changed": 12,
   "errors": [
     {
       "source": "Stadnina Koni w Dobrzyniewie",
@@ -17,6 +17,277 @@
     }
   ],
   "items": [
+    {
+      "id": "167f3f7fad5d2bf3c021569f",
+      "source_name": "Ośrodek Hodowli Zarodowej Gajewo",
+      "source_category": "OHZ",
+      "region": "Polska",
+      "title": "Zapytanie ofertowe nr 32/Z/2026 – Opracowanie koncepcji budowy obory dla 200-250 sztuk bydła mlecznego.",
+      "url": "https://ohzgajewo.pl/zapytanie-ofertowe-nr-32-z-2026-opracowanie-koncepcji-budowy-obory-dla-200-250-sztuk-bydla-mlecznego/",
+      "source_page": "https://ohzgajewo.pl/ogloszenia-i-przetargi/",
+      "published_date": "2026-07-20",
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 79,
+      "matched_keywords": [
+        "budow",
+        "obor"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "3e1a51969125a86ef8f2bb4ac7efdbb1381e1d29578e9bdcea76287829a0b996",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "01d40fa749a341c11b369bf7",
+      "source_name": "Ośrodek Hodowli Zarodowej Garzyn",
+      "source_category": "OHZ",
+      "region": "wielkopolskie",
+      "title": "Wykonanie dokumentacji projektowo-kosztorysowej na rozbudowę fermy Górzno o budynek obory dla bydła mlecznego i cielętników wraz z infrastrukturą towarzyszącą - oferty do 31.10.2025 r.",
+      "url": "https://garzyn.pl/pagesView,34,przetargi-i-oferty,PL",
+      "source_page": "https://garzyn.pl/pagesView,34,przetargi-i-oferty,PL",
+      "published_date": "2026-07-14",
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 100,
+      "matched_keywords": [
+        "budow",
+        "obor",
+        "rozbudow"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "b485a09b3cf6f313db2a273f6971561b72f749dc403fc8d7eb724463d2b60593",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "bd76e11c7877e7b4e2a618d0",
+      "source_name": "Ośrodek Hodowli Zarodowej Garzyn",
+      "source_category": "OHZ",
+      "region": "wielkopolskie",
+      "title": "Budowa magazynu oleju opałowego wraz z przebudową pomieszczenia wytwornicy pary w budynku mieszalni CMP Drobnin",
+      "url": "https://garzyn.pl/pagesView,34,przetargi-i-oferty,PL",
+      "source_page": "https://garzyn.pl/pagesView,34,przetargi-i-oferty,PL",
+      "published_date": "2026-07-14",
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 76,
+      "matched_keywords": [
+        "budow",
+        "magazyn",
+        "przebudow"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "b155dac4cc45b74fac60091e9c80421004e90413dbca31525e0f6e813f0575e9",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "5e029e684d8ef7afcb743598",
+      "source_name": "Ośrodek Hodowli Zarodowej Gajewo",
+      "source_category": "OHZ",
+      "region": "Polska",
+      "title": "Zapytanie ofertowe nr 29/Z/2026 – Prace modernizacyjne obory i hali udojowej",
+      "url": "https://ohzgajewo.pl/zapytanie-ofertowe-nr-29-z-2026-prace-modernizacyjne-obory-i-hali-udojowej/",
+      "source_page": "https://ohzgajewo.pl/ogloszenia-i-przetargi/",
+      "published_date": "2026-07-14",
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 75,
+      "matched_keywords": [
+        "moderniz",
+        "obor"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "5f98efe6ae3f0b7ec439788fa7d7600d1137b5d2529e76ede5b206a66a0e1041",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "6f7d2f842ea1e0ca54590524",
+      "source_name": "Ośrodek Hodowli Zarodowej Przerzeczyn Zdrój",
+      "source_category": "OHZ",
+      "region": "dolnośląskie",
+      "title": "przetarg nieograniczony: 'Rozbudowa obory o 48 stanowisk legowiskowych na terenie gospodarstwa w Gilowie dz. nr 498\"",
+      "url": "https://www.przerzeczyn.com.pl/przetargi",
+      "source_page": "https://www.przerzeczyn.com.pl/przetargi",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 100,
+      "matched_keywords": [
+        "budow",
+        "obor",
+        "rozbudow"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "ab20b324f306a4faaf7059eaa649924b42cc258df78086be3485ce9b05dcec69",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "3d79e163c7992c2a0ce05d78",
+      "source_name": "Ośrodek Hodowli Zarodowej Przerzeczyn Zdrój",
+      "source_category": "OHZ",
+      "region": "dolnośląskie",
+      "title": "\"Rozbudowa obory - dostosowanie dla montażu robotów, na terenie gospodarstwa w Gilowie dz. nr 498\"",
+      "url": "https://www.przerzeczyn.com.pl/przetargi",
+      "source_page": "https://www.przerzeczyn.com.pl/przetargi",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 100,
+      "matched_keywords": [
+        "budow",
+        "obor",
+        "rozbudow"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "d48f1dac826de0a7fb495c27a67340b8a808cb3214d3132a31b95ec5521043e9",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "3e9a915238f8ea0a38d4f9c8",
+      "source_name": "Ośrodek Hodowli Zarodowej Przerzeczyn Zdrój",
+      "source_category": "OHZ",
+      "region": "dolnośląskie",
+      "title": "Pisemny Przetarg nieograniczony :\"Przebudowa dachu budynku magazynu nr 3 na terenie gospodarstwa w Gilowie dz. nr 498\"",
+      "url": "https://www.przerzeczyn.com.pl/przetargi",
+      "source_page": "https://www.przerzeczyn.com.pl/przetargi",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 86,
+      "matched_keywords": [
+        "budow",
+        "dach",
+        "magazyn",
+        "przebudow"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "660c35ff76187516506c42fa2ed2cd3b1da44816fd48e9bf065de1ff8fbc941d",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "c7aafc10f18509bc79a63281",
+      "source_name": "Ośrodek Hodowli Zarodowej Przerzeczyn Zdrój",
+      "source_category": "OHZ",
+      "region": "dolnośląskie",
+      "title": "pisemny przetarg nieograniczony :\"Modernizacja magazynu silosów na zboże na terenie gospodarstwa w Gilowie dz.nr 498\"",
+      "url": "https://www.przerzeczyn.com.pl/przetargi",
+      "source_page": "https://www.przerzeczyn.com.pl/przetargi",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 80,
+      "matched_keywords": [
+        "magazyn",
+        "moderniz",
+        "silos"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "bd2d2655809ab23bc0123cf2f3ebd36aec745ef1a45487f440507f872f330cf2",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "84fcc93006575451e0eedfed",
+      "source_name": "Ośrodek Hodowli Zarodowej Przerzeczyn Zdrój",
+      "source_category": "OHZ",
+      "region": "dolnośląskie",
+      "title": "Przetarg: Modernizacja Jałownika nr 1 - Porodówka na terenie gospodarstwa w Gilowie dz. nr 498\"",
+      "url": "https://www.przerzeczyn.com.pl/przetargi",
+      "source_page": "https://www.przerzeczyn.com.pl/przetargi",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 68,
+      "matched_keywords": [
+        "moderniz",
+        "porodow"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "5ee25f3c7ab91d82da713a5e40377a3bcdbef8dd9aba2e62ff4eeb2a0b499c66",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "1ad5fcd80afdbeba83084f50",
+      "source_name": "Ośrodek Hodowli Zarodowej Przerzeczyn Zdrój",
+      "source_category": "OHZ",
+      "region": "dolnośląskie",
+      "title": "Przetarg nieograniczony pn. : \"Modernizacja Jałownik nr 1- Porodówka na terenie gospodarstwa w Gilowie dz. nr 498\"",
+      "url": "https://www.przerzeczyn.com.pl/przetargi",
+      "source_page": "https://www.przerzeczyn.com.pl/przetargi",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 68,
+      "matched_keywords": [
+        "moderniz",
+        "porodow"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "25140da0612e1b175b2dc40ab57e50a2af3a69f867ec37c4ebf4a8a5769d9fef",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "3f27a86a0887b9ff9ed7c4ba",
+      "source_name": "Ośrodek Hodowli Zarodowej Przerzeczyn Zdrój",
+      "source_category": "OHZ",
+      "region": "dolnośląskie",
+      "title": "Pisemny przetarg nieograniczony : \"Odbudowa kanałów odciekowych silosu na kiszonkę na terenie gospodarstwa w Gilowie\"",
+      "url": "https://www.przerzeczyn.com.pl/przetargi",
+      "source_page": "https://www.przerzeczyn.com.pl/przetargi",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 66,
+      "matched_keywords": [
+        "budow",
+        "silos"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "943bb53b9f0f19e579136e36420e993a227edc27478de5a521daab8dcf8c3a87",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "6d41fc25b141b85d66bea362",
+      "source_name": "Krajowa Grupa Spożywcza - ogłoszenia",
+      "source_category": "KGS",
+      "region": "Polska",
+      "title": "Wybór wykonawcy na przeprowadzenie remontu placu manewrowo - składowego przy silosie cukru w Oddziale Krajowej Grupy Spożywczej \"Terminal Cukrowy\" w Gdańsku.",
+      "url": "https://bip.kgssa.pl/1377%2Cogloszenia",
+      "source_page": "https://bip.kgssa.pl/1377%2Cogloszenia",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 60,
+      "matched_keywords": [
+        "remont",
+        "silos"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "0630ea72484632e2f4c920c595e67f8ad0b86d58d7eb8ca50a40f79dcecba2bf",
+      "date_found": "2026-08-04T09:48:46+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
     {
       "id": "4eeb066c44c6a896f8edfc18",
       "source_name": "Stado Ogierów Starogard Gdański - Rzeczna",
@@ -38,7 +309,7 @@
       "fingerprint": "730a48acf7cc0d3a9e1b2dded3de4fce745dcb61c93b8bbe03472d091393f101",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "b383638887c85db930c4f73e",
@@ -61,7 +332,7 @@
       "fingerprint": "619198cbf2b5312a1aebec5c8211482cc440bbdd1d9560588d04a7a4485d15dd",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "1909bde4223ea64b958de56e",
@@ -84,7 +355,7 @@
       "fingerprint": "1f345e2db00b68b74e99429bfbb07e4aade30b20401d8f72faec0b389aa5df71",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "0ec6f9775fed90527a87178d",
@@ -107,7 +378,7 @@
       "fingerprint": "2c9b18890970ea52834d4615ca931b461f16f356830c6a8b0ba61440645c1e9f",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "3f5d3ba2a40cf868d92c0617",
@@ -130,7 +401,7 @@
       "fingerprint": "5540df4a299c015bbc630fb7527c0ca4b98041b5771e96cfca64505eb4dc1022",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "1c265290740c4f1fff660a71",
@@ -152,7 +423,7 @@
       "fingerprint": "7ff836c4e02554efaad4a4d4f9c511b6584511666726a92b6baa627686eb614a",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "940f5f1445ca300c55aa2468",
@@ -174,7 +445,7 @@
       "fingerprint": "6352a78aa290911b2474f138f3c8711cad199215f7e93807270a5c3e7f5b494b",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "65bde3dc221dcd60923aad72",
@@ -196,7 +467,7 @@
       "fingerprint": "dec52bb340098d1c7830f9c0d1189bd160434b264049e31c2958e6fe51c32596",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "69adbd8572148ae46e0f1d80",
@@ -219,7 +490,30 @@
       "fingerprint": "beb8f9bfab30efdd1a23cb26a805df686de49c532ab22bac4ad8d06ede4503ca",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
+    },
+    {
+      "id": "ef54725f8dfffb8288619477",
+      "source_name": "Stado Ogierów Starogard Gdański - Rzeczna",
+      "source_category": "stadnina",
+      "region": "pomorskie",
+      "title": "Przetarg na PRZEBUDOWĘ TRZECH STAJNI",
+      "url": "https://www.rzeczna.pl/index.php/177-przetarg-na-przebudowa-trzech-stajni",
+      "source_page": "https://www.rzeczna.pl/index.php",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 100,
+      "matched_keywords": [
+        "budow",
+        "przebudow",
+        "stajni"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "75842b6c63ba745f6320b20256144a387424544602c9860cc668017f1471b850",
+      "date_found": "2026-08-04T09:00:39+00:00",
+      "change_type": "Bez zmian",
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "b71514180a7a1c8c5244de7b",
@@ -243,31 +537,7 @@
       "fingerprint": "ca96387ac7f97d2cbaa5d53c0da6dc307dd8b6acaa92abb4f0bb05fc98b364f5",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
-    },
-    {
-      "id": "ef54725f8dfffb8288619477",
-      "source_name": "Stado Ogierów Starogard Gdański - Rzeczna",
-      "source_category": "stadnina",
-      "region": "pomorskie",
-      "title": "Przetarg na PRZEBUDOWĘ TRZECH STAJNI",
-      "url": "https://www.rzeczna.pl/index.php/177-przetarg-na-przebudowa-trzech-stajni",
-      "source_page": "https://www.rzeczna.pl/index.php/177-przetarg-na-przebudowa-trzech-stajni",
-      "published_date": null,
-      "deadline": null,
-      "status": "Do sprawdzenia",
-      "score": 100,
-      "matched_keywords": [
-        "budow",
-        "przebudow",
-        "roboty budowlane",
-        "stajni"
-      ],
-      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
-      "fingerprint": "75842b6c63ba745f6320b20256144a387424544602c9860cc668017f1471b850",
-      "date_found": "2026-08-04T09:00:39+00:00",
-      "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "038840717a6f1e92e8947859",
@@ -290,7 +560,7 @@
       "fingerprint": "924e138066c2d485a3e821806d26aa2edfc06dbc0b855bf4f854ba2b5c5f069b",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "abf6815a62062386883cca1b",
@@ -314,7 +584,7 @@
       "fingerprint": "6a2f13be2c96e19b8ed555a3bd22ded724230635b3a58125413d8c03e4d9824c",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "43ccc613bed8c2bc9c67f342",
@@ -337,7 +607,7 @@
       "fingerprint": "7754ba53eb2d539fd2c6e6f01c1e52016341142bc915ed1c9492ad3f66434281",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "f6fa5ada0f6daa5b8f914130",
@@ -359,7 +629,7 @@
       "fingerprint": "36d5f9269d123657a6e5f27fb1acee55c62e153ff30879adcd96f8876efcd046",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     },
     {
       "id": "8c4ecdfff558cd50b1bdab14",
@@ -382,7 +652,7 @@
       "fingerprint": "5ec80effd425fd5f819085e97ada60602d6804c68bb196a29a50fc4f846b5886",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-08-04T09:30:02+00:00"
+      "last_seen": "2026-08-04T09:48:46+00:00"
     }
   ]
 }
