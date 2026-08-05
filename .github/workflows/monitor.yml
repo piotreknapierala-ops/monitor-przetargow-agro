@@ -2,8 +2,16 @@ name: Monitor przetargów Agro
 
 on:
   workflow_dispatch:
+
   schedule:
-    - cron: "17 6 * * *"
+    # Główny codzienny skan
+    - cron: "20 8 * * *"
+      timezone: "Europe/Warsaw"
+
+    # Awaryjna kontrola — uruchomi skan tylko,
+    # jeżeli dzisiejszy skan jeszcze się nie udał
+    - cron: "30 11 * * *"
+      timezone: "Europe/Warsaw"
 
 permissions:
   contents: write
@@ -11,12 +19,82 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  scan-and-publish:
+  check:
     runs-on: ubuntu-latest
+
+    outputs:
+      should_run: ${{ steps.decision.outputs.should_run }}
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v4
+
+      - name: Sprawdź, czy skan jest potrzebny
+        id: decision
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+
+          should_run = True
+          event_name = os.environ.get("EVENT_NAME", "")
+          event_schedule = os.environ.get("EVENT_SCHEDULE", "")
+
+          # Drugi termin jest wyłącznie kontrolą awaryjną.
+          if event_name == "schedule" and event_schedule == "30 11 * * *":
+              try:
+                  path = Path("docs/data.json")
+                  data = json.loads(path.read_text(encoding="utf-8"))
+
+                  generated_at = data.get("generated_at")
+                  generated = datetime.fromisoformat(
+                      generated_at.replace("Z", "+00:00")
+                  )
+
+                  warsaw = ZoneInfo("Europe/Warsaw")
+                  generated_local = generated.astimezone(warsaw)
+                  now_local = datetime.now(warsaw)
+
+                  if generated_local.date() == now_local.date():
+                      should_run = False
+                      print(
+                          "Dzisiejszy skan już się udał:",
+                          generated_local.isoformat()
+                      )
+                  else:
+                      print("Brak dzisiejszego skanu — uruchamiam próbę awaryjną.")
+
+              except Exception as error:
+                  print("Nie udało się potwierdzić aktualności danych:", error)
+                  print("Dla bezpieczeństwa uruchamiam skan awaryjny.")
+
+          else:
+              print("Skan główny albo ręczny — uruchamiam.")
+
+          output_path = os.environ["GITHUB_OUTPUT"]
+          with open(output_path, "a", encoding="utf-8") as output:
+              output.write(
+                  f"should_run={'true' if should_run else 'false'}\n"
+              )
+          PY
+
+  scan-and-publish:
+    needs: check
+    if: needs.check.outputs.should_run == 'true'
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -41,7 +119,9 @@ jobs:
         run: |
           git config user.name "agro-monitor-bot"
           git config user.email "actions@users.noreply.github.com"
+
           git add data/notices.json docs/data.json
+
           if git diff --cached --quiet; then
             echo "Brak zmian do zapisania"
           else
