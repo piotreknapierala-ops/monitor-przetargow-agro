@@ -1,35 +1,15 @@
 {
-  "generated_at": "2026-09-04T07:12:29+00:00",
+  "generated_at": "2026-09-05T10:51:19+00:00",
   "scanner_version": "6.1-lubiana-hotfix",
   "sources_checked": 68,
-  "found_this_run": 27,
-  "units_with_hits": 9,
+  "found_this_run": 29,
+  "units_with_hits": 11,
   "new_or_changed": 2,
   "errors": [
     {
-      "source": "Ośrodek Hodowli Zarodowej w Kamieńcu Ząbkowickim",
-      "url": "https://www.ohz-kamieniec.pl/",
-      "error": "HTTPConnectionPool(host='ohz-kamieniec.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='ohz-kamieniec.pl', port=80) at 0x7fbb73c4a480>, 'Connection to ohz-kamieniec.pl timed out. (connect timeout=18)'))"
-    },
-    {
-      "source": "Ośrodek Hodowli Zarodowej Dębołęka",
-      "url": "https://hodowladeboleka.pl/ogloszenia-i-przetargi/",
-      "error": "HTTPConnectionPool(host='www.hodowladeboleka.pl', port=80): Max retries exceeded with url: /ogloszenia-i-przetargi/ (Caused by ConnectTimeoutError(<HTTPConnection(host='www.hodowladeboleka.pl', port=80) at 0x7fbb727145f0>, 'Connection to www.hodowladeboleka.pl"
-    },
-    {
-      "source": "Ośrodek Hodowli Zarodowej Bobrowniki",
-      "url": "https://ohzbobrowniki.pl/",
-      "error": "HTTPConnectionPool(host='www.ohzbobrowniki.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.ohzbobrowniki.pl', port=80) at 0x7fbb723ddd00>, 'Connection to www.ohzbobrowniki.pl timed out. (connect timeout="
-    },
-    {
-      "source": "Stadnina Koni Janów Podlaski",
-      "url": "https://skjanow.pl/",
-      "error": "HTTPConnectionPool(host='www.skjanow.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.skjanow.pl', port=80) at 0x7fbb723def30>, 'Connection to www.skjanow.pl timed out. (connect timeout=18)'))"
-    },
-    {
       "source": "Stadnina Koni Racot",
       "url": "https://www.racot.pl/",
-      "error": "HTTPConnectionPool(host='racot.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='racot.pl', port=80) at 0x7fbb73b50830>, 'Connection to racot.pl timed out. (connect timeout=18)'))"
+      "error": "HTTPConnectionPool(host='racot.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='racot.pl', port=80) at 0x7fdd2805ec00>, 'Connection to racot.pl timed out. (connect timeout=18)'))"
     },
     {
       "source": "Stadnina Koni w Dobrzyniewie",
@@ -37,49 +17,14 @@
       "error": "403 Client Error: Forbidden for url: http://skdobrzyniewo.pl/"
     },
     {
-      "source": "Stadnina Koni Prudnik",
-      "url": "https://www.skprudnik.eu/",
-      "error": "HTTPConnectionPool(host='skprudnik.eu', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='skprudnik.eu', port=80) at 0x7fbb73c26330>, 'Connection to skprudnik.eu timed out. (connect timeout=18)'))"
-    },
-    {
-      "source": "Stado Ogierów w Łącku",
-      "url": "https://stadoogierow.pl/",
-      "error": "HTTPConnectionPool(host='www.stadoogierow.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.stadoogierow.pl', port=80) at 0x7fbb7246b500>, 'Connection to www.stadoogierow.pl timed out. (connect timeout=18)"
-    },
-    {
-      "source": "Fabryka Cukierków Pszczółka",
-      "url": "https://pszczolka.pl/",
-      "error": "HTTPConnectionPool(host='www.pszczolka.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.pszczolka.pl', port=80) at 0x7fbb73833b90>, 'Connection to www.pszczolka.pl timed out. (connect timeout=18)'))"
-    },
-    {
-      "source": "Kutnowska Hodowla Buraka Cukrowego",
-      "url": "https://khbc.pl/",
-      "error": "HTTPConnectionPool(host='www.khbc.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.khbc.pl', port=80) at 0x7fbb7233b3e0>, 'Connection to www.khbc.pl timed out. (connect timeout=18)'))"
-    },
-    {
-      "source": "Przedsiębiorstwo Zbożowo-Młynarskie PZZ w Stoisławiu",
-      "url": "https://www.stoislaw.com.pl/",
-      "error": "HTTPConnectionPool(host='stoislaw.com.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='stoislaw.com.pl', port=80) at 0x7fbb72379c10>, 'Connection to stoislaw.com.pl timed out. (connect timeout=18)'))"
-    },
-    {
-      "source": "Zamojskie Zakłady Zbożowe",
-      "url": "https://www.zzz.com.pl/",
-      "error": "HTTPConnectionPool(host='zzz.com.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='zzz.com.pl', port=80) at 0x7fbb73adddf0>, 'Connection to zzz.com.pl timed out. (connect timeout=18)'))"
-    },
-    {
       "source": "Instytut Ogrodnictwa PIB",
       "url": "https://www.inhort.pl/",
       "error": "HTTPConnectionPool(host='inhort.pl', port=80): Read timed out. (read timeout=18)"
     },
     {
-      "source": "Instytut Rybactwa Śródlądowego PIB",
-      "url": "https://www.infish.com.pl/",
-      "error": "HTTPConnectionPool(host='infish.com.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='infish.com.pl', port=80) at 0x7fbb72349550>, 'Connection to infish.com.pl timed out. (connect timeout=18)'))"
-    },
-    {
-      "source": "Instytut Włókien Naturalnych i Roślin Zielarskich PIB",
-      "url": "https://www.iwnirz.pl/",
-      "error": "HTTPConnectionPool(host='iwnirz.pl', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='iwnirz.pl', port=80) at 0x7fbb722d11c0>, 'Connection to iwnirz.pl timed out. (connect timeout=18)'))"
+      "source": "Instytut Technologiczno-Przyrodniczy PIB",
+      "url": "https://www.itp.edu.pl/",
+      "error": "HTTPConnectionPool(host='itp.edu.pl', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPConnection(host='itp.edu.pl', port=80): Failed to resolve 'itp.edu.pl' ([Errno -5] No address associated with hostname)\"))"
     }
   ],
   "items": [
@@ -103,7 +48,53 @@
       "fingerprint": "483d5a4e87b5d2bdb7d11c9d9d2e386cb13cbfbc1101693e1284cf2fb657ce7f",
       "date_found": "2026-08-28T21:39:22+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
+    },
+    {
+      "id": "abf6815a62062386883cca1b",
+      "source_name": "Stadnina Koni Prudnik",
+      "source_category": "stadnina",
+      "region": "opolskie",
+      "title": "Roboty budowlane dla inwestycji modernizacji krytej ujeżdżalni koni wraz z robotami dla budowy zaplecza magazynowego",
+      "url": "https://sk.skprudnik.eu/wp-content/uploads/2024/10/OGLOSZENIE.pdf",
+      "source_page": "https://sk.skprudnik.eu/index.php/przetargi-5/",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 94,
+      "matched_keywords": [
+        "budow",
+        "magazyn",
+        "moderniz",
+        "roboty budowlane"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "6a2f13be2c96e19b8ed555a3bd22ded724230635b3a58125413d8c03e4d9824c",
+      "date_found": "2026-09-05T10:51:19+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-09-05T10:51:19+00:00"
+    },
+    {
+      "id": "85253e860a6c8fb3b075521b",
+      "source_name": "Stado Ogierów w Łącku",
+      "source_category": "stadnina",
+      "region": "mazowieckie",
+      "title": "Zapytanie Ofertowe Modernizacja Stajni",
+      "url": "https://stadoogierow.pl/zapytanie-ofertowe-modernizacja-stajni/",
+      "source_page": "https://stadoogierow.pl/przetargi-2/",
+      "published_date": null,
+      "deadline": null,
+      "status": "Do sprawdzenia",
+      "score": 72,
+      "matched_keywords": [
+        "moderniz",
+        "stajni"
+      ],
+      "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
+      "fingerprint": "36d5f9269d123657a6e5f27fb1acee55c62e153ff30879adcd96f8876efcd046",
+      "date_found": "2026-09-05T10:51:19+00:00",
+      "change_type": "Nowe",
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "94d31d3e2cf5ebd665a7b8c4",
@@ -125,8 +116,8 @@
       "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
       "fingerprint": "9c5a61c8db23a006224e69791ad823370756b1e4dd3814fdbe1e9ad20e8c93eb",
       "date_found": "2026-08-04T10:40:35+00:00",
-      "change_type": "Zmienione",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "change_type": "Bez zmian",
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "40dfb130e940b28fc2c37b17",
@@ -148,8 +139,8 @@
       "snippet": "Załączniki i dokumenty tego postępowania zostały zgrupowane.",
       "fingerprint": "638b3fc274b2cfb29b64eb33e6b86682a394dec03c28b49e081c4f7d299069ef",
       "date_found": "2026-08-04T10:40:35+00:00",
-      "change_type": "Zmienione",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "change_type": "Bez zmian",
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "9c61961be6b525e887386ec4",
@@ -172,7 +163,7 @@
       "fingerprint": "0adbf060134846eb93aae06fd48ca8bd5cd0b5c8c9c36975f2e686e61824446b",
       "date_found": "2026-09-03T06:45:55+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "8572fa1a247067ac2a9fb894",
@@ -195,7 +186,7 @@
       "fingerprint": "730a48acf7cc0d3a9e1b2dded3de4fce745dcb61c93b8bbe03472d091393f101",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "458aa2642d3ce6b10e5c435d",
@@ -217,7 +208,7 @@
       "fingerprint": "3e1a51969125a86ef8f2bb4ac7efdbb1381e1d29578e9bdcea76287829a0b996",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "72aaca39e961caf2b142f225",
@@ -240,7 +231,7 @@
       "fingerprint": "af6393b613cd32e2efb358e0ce8d242e9f401339ebaae847bb5eb909a7ffa85c",
       "date_found": "2026-08-24T08:39:17+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "98cdf8588de7c9c33e3d027a",
@@ -264,7 +255,7 @@
       "fingerprint": "8939bd2a196bcb190c3735882fd81f6303411847a522ac90f347fddf80fde9f9",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "5e029e684d8ef7afcb743598",
@@ -286,7 +277,7 @@
       "fingerprint": "5f98efe6ae3f0b7ec439788fa7d7600d1137b5d2529e76ede5b206a66a0e1041",
       "date_found": "2026-08-04T09:48:46+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "93b52e6a963c2f9ba5774308",
@@ -309,7 +300,7 @@
       "fingerprint": "b8b27431441af2e40fde82c0442db31314418bed93b91cbdda5934a26d18ac2a",
       "date_found": "2026-08-24T08:39:17+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "1cb98bf0da2c257608a36b1e",
@@ -332,7 +323,7 @@
       "fingerprint": "2c9b18890970ea52834d4615ca931b461f16f356830c6a8b0ba61440645c1e9f",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "3f5d3ba2a40cf868d92c0617",
@@ -355,7 +346,7 @@
       "fingerprint": "5540df4a299c015bbc630fb7527c0ca4b98041b5771e96cfca64505eb4dc1022",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "3307ec484302eb2d3b5b36d6",
@@ -377,7 +368,7 @@
       "fingerprint": "7ff836c4e02554efaad4a4d4f9c511b6584511666726a92b6baa627686eb614a",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "fdfa1d453785a423212fef08",
@@ -399,7 +390,7 @@
       "fingerprint": "6352a78aa290911b2474f138f3c8711cad199215f7e93807270a5c3e7f5b494b",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "54a4b77d9a00b8f43898beed",
@@ -421,7 +412,7 @@
       "fingerprint": "dec52bb340098d1c7830f9c0d1189bd160434b264049e31c2958e6fe51c32596",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "8ea8f1b3b87592a518970ac5",
@@ -446,7 +437,7 @@
       "fingerprint": "1c49e5f03ca640b046683447a557e08105f05e2dcf3776e46dc337836355644a",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "6f7d2f842ea1e0ca54590524",
@@ -469,7 +460,7 @@
       "fingerprint": "ab20b324f306a4faaf7059eaa649924b42cc258df78086be3485ce9b05dcec69",
       "date_found": "2026-08-04T09:48:46+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "3d79e163c7992c2a0ce05d78",
@@ -492,7 +483,7 @@
       "fingerprint": "d48f1dac826de0a7fb495c27a67340b8a808cb3214d3132a31b95ec5521043e9",
       "date_found": "2026-08-04T09:48:46+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "ef54725f8dfffb8288619477",
@@ -515,7 +506,7 @@
       "fingerprint": "75842b6c63ba745f6320b20256144a387424544602c9860cc668017f1471b850",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "b71514180a7a1c8c5244de7b",
@@ -539,7 +530,7 @@
       "fingerprint": "ca96387ac7f97d2cbaa5d53c0da6dc307dd8b6acaa92abb4f0bb05fc98b364f5",
       "date_found": "2026-08-04T09:00:39+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "a1d50c25a0b2834212f5a7d2",
@@ -562,7 +553,7 @@
       "fingerprint": "a4de31d93f585b9dd49285842691077d16c04b13720bb1f1aa7faa5905eae4d6",
       "date_found": "2026-09-03T06:45:55+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "3e9a915238f8ea0a38d4f9c8",
@@ -586,7 +577,7 @@
       "fingerprint": "660c35ff76187516506c42fa2ed2cd3b1da44816fd48e9bf065de1ff8fbc941d",
       "date_found": "2026-08-04T09:48:46+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "c7aafc10f18509bc79a63281",
@@ -609,7 +600,7 @@
       "fingerprint": "bd2d2655809ab23bc0123cf2f3ebd36aec745ef1a45487f440507f872f330cf2",
       "date_found": "2026-08-04T09:48:46+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "16904390f8112a1906017e0b",
@@ -631,7 +622,7 @@
       "fingerprint": "5ee25f3c7ab91d82da713a5e40377a3bcdbef8dd9aba2e62ff4eeb2a0b499c66",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "f2053669a76b8fa480a62efa",
@@ -653,7 +644,7 @@
       "fingerprint": "25140da0612e1b175b2dc40ab57e50a2af3a69f867ec37c4ebf4a8a5769d9fef",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "56cddde1cb967c66c585a68c",
@@ -675,7 +666,7 @@
       "fingerprint": "943bb53b9f0f19e579136e36420e993a227edc27478de5a521daab8dcf8c3a87",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     },
     {
       "id": "4056034d580853eaf91d5c56",
@@ -697,7 +688,7 @@
       "fingerprint": "0630ea72484632e2f4c920c595e67f8ad0b86d58d7eb8ca50a40f79dcecba2bf",
       "date_found": "2026-08-04T10:40:35+00:00",
       "change_type": "Bez zmian",
-      "last_seen": "2026-09-04T07:12:29+00:00"
+      "last_seen": "2026-09-05T10:51:19+00:00"
     }
   ]
 }
